@@ -19,14 +19,37 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <build>
+    
+  
+  <reporting>
+      <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+            <failsOnError>true</failsOnError>
+            <failOnViolation>true</failOnViolation>
+            <violationSeverity>warning</violationSeverity>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <consoleOutput>true</consoleOutput>
+            <configLocation>google_checks.xml</configLocation>
+        </configuration>
+    </plugin>
+    </plugins>
+  </reporting>
+  
+  
+  <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.0.0</version>
         <configuration>
-            <failsOnError>false</failsOnError>
+            <failsOnError>true</failsOnError>
+            <failOnViolation>true</failOnViolation>
+            
             <violationSeverity>warning</violationSeverity>
             <includeTestSourceDirectory>true</includeTestSourceDirectory>
             <consoleOutput>true</consoleOutput>
@@ -50,22 +73,6 @@
   </extension>
  </extensions>
   </build>
-  
-  <reporting>
-      <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-            <failsOnError>false</failsOnError>
-            <includeTestSourceDirectory>true</includeTestSourceDirectory>
-            <consoleOutput>true</consoleOutput>
-            <configLocation>google_checks.xml</configLocation>
-        </configuration>
-    </plugin>
-    </plugins>
-  </reporting>
   
   <distributionManagement>
     <site>
