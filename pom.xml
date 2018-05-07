@@ -49,7 +49,6 @@
         <configuration>
             <failsOnError>true</failsOnError>
             <failOnViolation>true</failOnViolation>
-            
             <violationSeverity>warning</violationSeverity>
             <includeTestSourceDirectory>true</includeTestSourceDirectory>
             <consoleOutput>true</consoleOutput>
