@@ -1,1 +1,6 @@
 language: java
+addons:
+  sonarcloud:
+    organization: "bdomingues-github"
+script:
+  - sonar-scanner
