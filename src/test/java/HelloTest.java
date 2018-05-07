@@ -1,10 +1,5 @@
-
 import org.junit.Test;
 
-/**
- *
- * @author tkardozo
- */
 public class HelloTest {
 
   @Test
