@@ -6,7 +6,7 @@ addons:
 script:
   # JaCoCo is used to have code coverage, the agent has to be activated
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar 
-
+after_script: mvn site site:deploy
 cache:
   directories:
     - '$HOME/.m2/repository'
