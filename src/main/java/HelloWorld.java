@@ -11,6 +11,10 @@ public class HelloWorld {
     
   public static void main(String[] args) {
     //AHAHAHAH
+    if(true)
+    {
+        LOGGER.info("OK");
+    }
     LOGGER.info("GoNutri FTW");
   }
     
