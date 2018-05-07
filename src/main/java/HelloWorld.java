@@ -12,7 +12,7 @@ public class HelloWorld {
   public static void main(String[] args) {
     if(true)
     {
-        LOGGER.info("OK");
+      LOGGER.info("OK");
     }
     LOGGER.info("GoNutri FTW");
   }
