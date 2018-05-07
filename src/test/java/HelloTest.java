@@ -2,9 +2,9 @@ import org.junit.Test;
 
 public class HelloTest {
 
-  @Test
+      @Test
   public void testThis() {
-     assert true || false;
+    assert true || false;
   }
     
 }
