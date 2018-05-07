@@ -10,7 +10,6 @@ public class HelloWorld {
       Thread.currentThread().getStackTrace()[0].getClassName() );
     
   public static void main(String[] args) {
-    //AHAHAHAH
     if(true)
     {
         LOGGER.info("OK");
