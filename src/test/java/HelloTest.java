@@ -1,3 +1,6 @@
+
+import org.junit.Test;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,8 +13,8 @@
  */
 public class HelloTest {
 
-    
-    public static void main(String[] args) {
+    @Test
+    void testThis() {
         assert false;
     }
     
