@@ -2,5 +2,12 @@ language: java
 addons:
   sonarcloud:
     organization: "bdomingues-github"
+
 script:
-  - sonar-scanner
+  # JaCoCo is used to have code coverage, the agent has to be activated
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+- '$HOME/.sonar/cache'
