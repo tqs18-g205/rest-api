@@ -1,13 +1,15 @@
 package pt.tqs.g205.resources;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import pt.tqs.g205.domain.CategoriaPrato;
 import pt.tqs.g205.services.CategoriaPratoService;
+
+import java.util.List;
 
 /**
  * Controlador REST para expor Categorias de Pratos.
@@ -18,7 +20,11 @@ public class CategoriaPratoResource {
 
   @Autowired
   private CategoriaPratoService categoriaService;
-
+  
+  /**
+   * Endpoint para conseguir todos os pratos.
+   * @return JSON com descricao de todos os pratos.
+   */
   @RequestMapping(value = "/pratos", method = RequestMethod.GET)
   public ResponseEntity<?> getAll() {
     List<CategoriaPrato> categorias = categoriaService.getAll();

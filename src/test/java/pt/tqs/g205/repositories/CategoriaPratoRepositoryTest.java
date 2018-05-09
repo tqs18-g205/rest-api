@@ -1,14 +1,16 @@
 package pt.tqs.g205.repositories;
 
-import java.util.Collection;
-import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import pt.tqs.g205.domain.CategoriaPrato;
+
+import java.util.Collection;
+import java.util.Optional;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)

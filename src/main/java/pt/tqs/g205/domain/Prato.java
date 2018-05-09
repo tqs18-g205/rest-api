@@ -2,9 +2,11 @@ package pt.tqs.g205.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -126,8 +128,9 @@ public class Prato implements Serializable {
       if (other.id != null) {
         return false;
       }
-    } else if (!id.equals(other.id))
+    } else if (!id.equals(other.id)) {
       return false;
+    }
     return true;
   }
 

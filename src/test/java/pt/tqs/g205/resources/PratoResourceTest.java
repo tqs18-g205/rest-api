@@ -1,6 +1,5 @@
 package pt.tqs.g205.resources;
 
-import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import pt.tqs.g205.RestapiApplication;
 import pt.tqs.g205.domain.Prato;
 import pt.tqs.g205.services.PratoService;
+
+import java.util.Collections;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = RestapiApplication.class)
@@ -34,7 +36,10 @@ public class PratoResourceTest {
 
   @InjectMocks
   private PratoResource pratoResource;
-
+  
+  /**
+   * Setup dos testes.
+   */
   @Before
   public void setup() {
     MockitoAnnotations.initMocks(this);

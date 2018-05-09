@@ -1,7 +1,5 @@
 package pt.tqs.g205.services;
 
-import java.util.Collections;
-import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import pt.tqs.g205.domain.Prato;
 import pt.tqs.g205.repositories.PratoRepository;
+
+import java.util.Collections;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,9 +37,9 @@ public class PratoServiceTest {
     Assertions.assertThat(pratos).isNotNull();
     Assertions.assertThat(pratos).isNotEmpty();
     Assertions.assertThat(pratos.size()).isEqualTo(1);
-    Prato p = pratos.iterator().next();
-    Assertions.assertThat(p).isNotNull();
-    Assertions.assertThat(p).isEqualTo(p1);
+    Prato prato = pratos.iterator().next();
+    Assertions.assertThat(prato).isNotNull();
+    Assertions.assertThat(prato).isEqualTo(p1);
   }
 
 }
