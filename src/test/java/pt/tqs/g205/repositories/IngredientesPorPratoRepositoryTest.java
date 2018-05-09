@@ -42,13 +42,13 @@ public class IngredientesPorPratoRepositoryTest {
     pratoRepo.save(p1);
     ingredientesPorPratoRepo.save(ipp1);
 
-    List<IngredientesPorPrato> ingredientes = ingredientesPorPratoRepo.findByPratoId(1);
+    List<IngredientesPorPrato> ingredientes = ingredientesPorPratoRepo.findByPratoId(p1.getId());
 
     Assertions.assertThat(ingredientes).isNotNull();
     Assertions.assertThat(ingredientes).isNotEmpty();
 
     IngredientesPorPrato ipp = ingredientes.iterator().next();
 
-    Assertions.assertThat(ipp.getId()).isEqualTo(new IngredientesPorPratoPk(1, 1));
+    Assertions.assertThat(ipp.getId()).isEqualTo(new IngredientesPorPratoPk(p1.getId(), i1.getId()));
   }
 }
