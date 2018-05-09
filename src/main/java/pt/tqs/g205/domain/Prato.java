@@ -1,5 +1,7 @@
 package pt.tqs.g205.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * 
+ * 
+ *
+ */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Prato implements Serializable {
