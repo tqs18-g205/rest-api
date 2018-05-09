@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 import pt.tqs.g205.domain.Prato;
 import pt.tqs.g205.repositories.PratoRepository;
 
+/**
+ * 
+ * 
+ *
+ */
 @Service
 public class PratoService {
 

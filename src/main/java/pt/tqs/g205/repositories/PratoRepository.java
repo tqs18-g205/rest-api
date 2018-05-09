@@ -4,6 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pt.tqs.g205.domain.Prato;
 
+/**
+ * 
+ * 
+ *
+ */
 @Repository
 public interface PratoRepository extends JpaRepository<Prato, Integer> {
 

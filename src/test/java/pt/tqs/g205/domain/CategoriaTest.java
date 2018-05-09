@@ -7,10 +7,10 @@ public class CategoriaTest {
 
   @Test
   public void creation() {
-    CategoriaPrato c = new CategoriaPrato(1, "Italiano");
-    Assertions.assertThat(c.getId()).isEqualTo(1);
-    Assertions.assertThat(c.getNome()).isNotBlank();
-    Assertions.assertThat(c.getNome()).isEqualTo("Italiano");
+    CategoriaPrato cat = new CategoriaPrato(1, "Italiano");
+    Assertions.assertThat(cat.getId()).isEqualTo(1);
+    Assertions.assertThat(cat.getNome()).isNotBlank();
+    Assertions.assertThat(cat.getNome()).isEqualTo("Italiano");
   }
 
 }

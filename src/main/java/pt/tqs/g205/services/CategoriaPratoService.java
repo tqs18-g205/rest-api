@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import pt.tqs.g205.domain.CategoriaPrato;
 import pt.tqs.g205.repositories.CategoriaPratoRepository;
 
+/**
+ * 
+ * 
+ *
+ */
 @Service
 public class CategoriaPratoService {
 

@@ -1,5 +1,6 @@
 package pt.tqs.g205.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * 
- * 
+ * Categorias dos Pratos.
  *
  */
 @Entity
@@ -34,6 +34,11 @@ public class CategoriaPrato implements Serializable {
 
   public CategoriaPrato() {}
 
+  /**
+   * Construtor.
+   * @param id id do objecto (gerado automaticamente).
+   * @param name nome do prato.
+   */
   public CategoriaPrato(Integer id, String name) {
     super();
     this.id = id;

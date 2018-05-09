@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import pt.tqs.g205.domain.CategoriaPrato;
 import pt.tqs.g205.services.CategoriaPratoService;
 
+/**
+ * 
+ * 
+ *
+ */
 @RestController
 @RequestMapping(value = "/api/categorias")
 public class CategoriaPratoResource {
