@@ -49,6 +49,7 @@ public class IngredientesPorPratoRepositoryTest {
 
     IngredientesPorPrato ipp = ingredientes.iterator().next();
 
-    Assertions.assertThat(ipp.getId()).isEqualTo(new IngredientesPorPratoPk(p1.getId(), i1.getId()));
+    Assertions.assertThat(ipp.getId()).isEqualTo(
+        new IngredientesPorPratoPk(p1.getId(), i1.getId()));
   }
 }
