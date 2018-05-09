@@ -14,9 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
- * Entidade Prato.
+ * Prato.
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -38,14 +39,18 @@ public class Prato implements Serializable {
       inverseJoinColumns = @JoinColumn(name = "categoria_id"))
   private List<CategoriaPrato> categorias = new ArrayList<>();
 
-  public Prato() {}
+  @JsonManagedReference
+  @OneToMany(mappedBy = "ingrediente")
+  private List<IngredientesPorPrato> ingredientes = new ArrayList<>();
 
+  public Prato() {}
+  
   /**
-   * Construtor.
-   * @param id id do objecto.
+   * Constructor.
+   * @param id id do prato.
    * @param nome nome do prato.
    * @param preco preco do prato.
-   * @param imagem imagem descritiva do prato.
+   * @param imagem url para imagem descritiva do prato.
    */
   public Prato(Integer id, String nome, Double preco, String imagem) {
     super();
@@ -54,6 +59,24 @@ public class Prato implements Serializable {
     this.preco = preco;
     this.imagem = imagem;
     this.calorias = 0.0;
+  }
+  
+  /**
+   * Calcular calorias totais do prato.
+   * @return calorias totais.
+   */
+  public Double calcularCalorias() {
+    Double result = 0.0;
+
+    if (ingredientes == null) {
+      return result;
+    }
+
+    for (IngredientesPorPrato i : ingredientes) {
+      result += i.getQuantidade() / 100.0 * i.getIngrediente().getCalorias();
+    }
+
+    return result;
   }
 
   public String getImagem() {
@@ -96,12 +119,29 @@ public class Prato implements Serializable {
     this.nome = nome;
   }
 
+
+
   public List<CategoriaPrato> getCategorias() {
     return categorias;
   }
 
   public void setCategorias(List<CategoriaPrato> categorias) {
     this.categorias = categorias;
+  }
+
+  public List<IngredientesPorPrato> getIngredientes() {
+    return ingredientes;
+  }
+  
+  /**
+   * Atribui ingredientes ao prato e calcula calorias totais.
+   * @param ingredientes lista de ingredientes.
+   */
+  public void setIngredientes(List<IngredientesPorPrato> ingredientes) {
+    this.ingredientes = ingredientes;
+    if (ingredientes != null) {
+      this.calorias = calcularCalorias();
+    }
   }
 
   @Override

@@ -30,9 +30,9 @@ public class CategoriaPratoRepositoryTest {
 
   @Test
   public void findById() {
-    CategoriaPrato cprato = categoriaRepo.save(new CategoriaPrato(null, "Italiano"));
-    Optional<CategoriaPrato> categoria = categoriaRepo.findById(cprato.getId());
-    Assertions.assertThat(categoria.get().getId()).isEqualTo(cprato.getId());
+    categoriaRepo.save(new CategoriaPrato(null, "Italiano"));
+    Optional<CategoriaPrato> categoria = categoriaRepo.findById(1);
+    Assertions.assertThat(categoria.get().getId()).isEqualTo(1);
 
   }
 }

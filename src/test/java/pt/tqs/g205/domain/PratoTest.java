@@ -12,6 +12,7 @@ public class PratoTest {
     Assertions.assertThat(prato.getId()).isEqualTo(1);
     Assertions.assertThat(prato.getNome()).isNotBlank();
     Assertions.assertThat(prato.getNome()).isEqualTo("Esparguete Bolonhesa");
+    Assertions.assertThat(prato.getIngredientes()).isNotNull();
   }
 
 }

@@ -8,22 +8,21 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import pt.tqs.g205.domain.Prato;
+import pt.tqs.g205.domain.Ingrediente;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
-public class PratoJpaTest {
+public class IngredienteJpaTest {
   @Autowired
   private TestEntityManager tem;
 
   @Test
   public void mapping() {
-    Prato p1 = new Prato(null, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
-    Prato persisted = tem.persistAndFlush(p1);
+    Ingrediente ing = new Ingrediente(null, "Arroz", 100.0);
+    Ingrediente persisted = tem.persistAndFlush(ing);
     Assertions.assertThat(persisted.getId()).isNotNull();
     Assertions.assertThat(persisted.getId()).isGreaterThan(0);
-    Assertions.assertThat(persisted.getNome()).isEqualTo("Arroz de pato");
-    Assertions.assertThat(persisted.getIngredientes()).isEmpty();
+    Assertions.assertThat(persisted.getNome()).isEqualTo("Arroz");
+    Assertions.assertThat(persisted.getPratos()).isEmpty();
   }
 }

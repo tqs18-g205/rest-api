@@ -60,4 +60,29 @@ public class PratoResourceTest {
         .andExpect(MockMvcResultMatchers.jsonPath("@.[0].nome").value("Arroz de pato"));
   }
 
+  @Test
+  public void getPrato() throws Exception {
+    Prato p1 = new Prato(1, "Arroz de pato", 6.5,
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+    Mockito.when(pratoService.getPratoById(1)).thenReturn(p1);
+
+    this.mockMvc.perform(MockMvcRequestBuilders.get("/api/pratos/1"))
+        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("@.nome").value("Arroz de pato"));
+  }
+
+  @Test
+  public void getPratosByCategorias() throws Exception {
+    Prato p1 = new Prato(1, "Arroz de pato", 6.5,
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+    Mockito.when(pratoService.getByCalorias(500.0)).thenReturn(Collections.singletonList(p1));
+
+    this.mockMvc.perform(MockMvcRequestBuilders.get("/api/pratos/calorias/500"))
+        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("@.[0].id").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("@.[0].nome").value("Arroz de pato"));
+  }
 }
