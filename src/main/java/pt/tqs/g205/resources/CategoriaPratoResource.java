@@ -10,9 +10,7 @@ import pt.tqs.g205.domain.CategoriaPrato;
 import pt.tqs.g205.services.CategoriaPratoService;
 
 /**
- * 
- * 
- *
+ * Controlador REST para expor Categorias de Pratos.
  */
 @RestController
 @RequestMapping(value = "/api/categorias")

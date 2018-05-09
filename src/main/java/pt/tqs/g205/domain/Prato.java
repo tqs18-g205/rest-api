@@ -14,9 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
- * 
- * 
- *
+ * Entidade Prato.
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -40,6 +38,13 @@ public class Prato implements Serializable {
 
   public Prato() {}
 
+  /**
+   * Construtor.
+   * @param id id do objecto.
+   * @param nome nome do prato.
+   * @param preco preco do prato.
+   * @param imagem imagem descritiva do prato.
+   */
   public Prato(Integer id, String nome, Double preco, String imagem) {
     super();
     this.id = id;

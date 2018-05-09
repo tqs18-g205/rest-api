@@ -10,9 +10,7 @@ import pt.tqs.g205.domain.Prato;
 import pt.tqs.g205.services.PratoService;
 
 /**
- * 
- * 
- *
+ * Controlador REST para expor pratos.
  */
 @RestController
 @RequestMapping(value = "/api/pratos")

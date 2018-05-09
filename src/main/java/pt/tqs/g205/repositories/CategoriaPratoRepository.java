@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 import pt.tqs.g205.domain.CategoriaPrato;
 
 /**
- * 
- * 
- *
+ * Operacoes de persistencia para a classe CategoriaPrato.
  */
 @Repository
 public interface CategoriaPratoRepository extends JpaRepository<CategoriaPrato, Integer> {

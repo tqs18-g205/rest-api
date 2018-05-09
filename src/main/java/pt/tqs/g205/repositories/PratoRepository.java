@@ -5,9 +5,7 @@ import org.springframework.stereotype.Repository;
 import pt.tqs.g205.domain.Prato;
 
 /**
- * 
- * 
- *
+ * Operacoes de persistencia para a classe Prato.
  */
 @Repository
 public interface PratoRepository extends JpaRepository<Prato, Integer> {

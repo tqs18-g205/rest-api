@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pt.tqs.g205.domain.CategoriaPrato;
-import pt.tqs.g205.repositories.CategoriaPratoRepository;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
@@ -29,9 +28,9 @@ public class CategoriaPratoRepositoryTest {
 
   @Test
   public void findById() {
-    CategoriaPrato p = categoriaRepo.save(new CategoriaPrato(null, "Italiano"));
-    Optional<CategoriaPrato> categoria = categoriaRepo.findById(p.getId());
-    Assertions.assertThat(categoria.get().getId()).isEqualTo(p.getId());
+    CategoriaPrato cprato = categoriaRepo.save(new CategoriaPrato(null, "Italiano"));
+    Optional<CategoriaPrato> categoria = categoriaRepo.findById(cprato.getId());
+    Assertions.assertThat(categoria.get().getId()).isEqualTo(cprato.getId());
 
   }
 }
