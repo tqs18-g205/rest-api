@@ -26,7 +26,7 @@ public class CategoriaPratoResource {
    * @return lista de todos os pratos.
    */
   @RequestMapping(value = "/pratos", method = RequestMethod.GET)
-  public ResponseEntity<?> getAll() {
+  public ResponseEntity<List<CategoriaPrato>> getAll() {
     List<CategoriaPrato> categorias = categoriaService.getAll();
 
     return ResponseEntity.ok(categorias);

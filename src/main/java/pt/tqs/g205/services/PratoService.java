@@ -31,9 +31,7 @@ public class PratoService {
   public List<Prato> getAll() {
     List<Prato> pratos = pratoRepo.findAll();
 
-    pratos.forEach(e -> {
-      e.setIngredientes(null);
-    });
+    pratos.forEach(e -> e.setIngredientes(null));
 
     return pratos;
   }
@@ -65,9 +63,10 @@ public class PratoService {
   public List<Prato> getByCalorias(Double value) {
     List<Prato> pratos = pratoRepo.findAll();
 
-    List<Prato> res =
-        pratos.stream().filter(e -> e.getCalorias() <= value).collect(Collectors.toList());
-    return res;
+    return pratos
+        .stream()
+        .filter(e -> e.getCalorias() <= value)
+        .collect(Collectors.toList());
   }
 
 }

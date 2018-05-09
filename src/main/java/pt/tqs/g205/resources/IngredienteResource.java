@@ -26,7 +26,7 @@ public class IngredienteResource {
    * @return todos os ingredientes.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<?> getAll() {
+  public ResponseEntity<List<Ingrediente>> getAll() {
     List<Ingrediente> ingredientes = ingredienteService.getAll();
 
     return ResponseEntity.ok(ingredientes);

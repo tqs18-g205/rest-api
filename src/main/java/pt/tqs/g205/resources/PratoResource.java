@@ -27,7 +27,7 @@ public class PratoResource {
    * @return todos os pratos.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<?> getAll() {
+  public ResponseEntity<List<Prato>> getAll() {
     List<Prato> pratos = pratoService.getAll();
 
     return ResponseEntity.ok(pratos);
@@ -39,7 +39,7 @@ public class PratoResource {
    * @return detalhes do prato.
    */
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public ResponseEntity<?> getPrato(@PathVariable("id") Integer id) {
+  public ResponseEntity<Prato> getPrato(@PathVariable("id") Integer id) {
     Prato prato = pratoService.getPratoById(id);
 
     prato.getIngredientes().forEach(e -> e.setId(null));
@@ -53,7 +53,7 @@ public class PratoResource {
    * @return lista de pratos filtrados.
    */
   @RequestMapping(value = "/calorias/{value}", method = RequestMethod.GET)
-  public ResponseEntity<?> getPratosByCalorias(@PathVariable("value") Double value) {
+  public ResponseEntity<List<Prato>> getPratosByCalorias(@PathVariable("value") Double value) {
     List<Prato> pratos = pratoService.getByCalorias(value);
 
     return ResponseEntity.ok(pratos);
