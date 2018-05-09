@@ -34,10 +34,12 @@ public class CategoriaPratoService {
    * @param id id da categoria.
    * @return categoria.
    */
-  public CategoriaPrato getById(Integer id) {
+  public CategoriaPrato getById(Integer id) throws NoSuchElementException {
     Optional<CategoriaPrato> cat = categoriaRepo.findById(id);
 
-    return cat.orElseThrow(() -> new NoSuchElementException());
+    if(cat.get() == null)
+      throw new NoSuchElementException();
+    return cat.get();
   }
 
 

@@ -26,7 +26,7 @@ public class PratoResource {
    * @return JSON com descricao sumaria de todos os pratos.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<?> getAll() {
+  public ResponseEntity<List<Prato>> getAll() {
     List<Prato> pratos = pratoService.getAll();
 
     return ResponseEntity.ok(pratos);

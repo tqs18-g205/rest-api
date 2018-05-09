@@ -22,9 +22,8 @@ public class PratoService {
    * @return lista de Pratos.
    */
   public List<Prato> getAll() {
-    List<Prato> pratos = pratoRepo.findAll();
+    return pratoRepo.findAll();
 
-    return pratos;
   }
 
 }
