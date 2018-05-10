@@ -6,43 +6,43 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
- * Categorias de pratos.
+ * Ingredientes.
  */
 @Entity
-public class CategoriaPrato implements Serializable {
+public class Ingrediente implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-
-  @Column(unique = true)
   private String nome;
+  private Double calorias;
 
   @JsonBackReference
-  @ManyToMany(mappedBy = "categorias")
-  private List<Prato> pratos = new ArrayList<>();
+  @OneToMany(mappedBy = "prato")
+  private List<IngredientesPorPrato> pratos = new ArrayList<>();
 
-  public CategoriaPrato() {}
+  public Ingrediente() {}
   
   /**
    * Construtor.
-   * @param id id da categoria.
-   * @param name nome do prato.
+   * @param id id do ingrediente.
+   * @param nome nome do ingrediente.
+   * @param calorias calorias por 100g de ingrediente.
    */
-  public CategoriaPrato(Integer id, String name) {
+  public Ingrediente(Integer id, String nome, Double calorias) {
     super();
     this.id = id;
-    this.nome = name;
+    this.nome = nome;
+    this.calorias = calorias;
   }
 
   public Integer getId() {
@@ -57,15 +57,23 @@ public class CategoriaPrato implements Serializable {
     return nome;
   }
 
-  public void setNome(String name) {
-    this.nome = name;
+  public void setNome(String nome) {
+    this.nome = nome;
   }
 
-  public List<Prato> getPratos() {
+  public Double getCalorias() {
+    return calorias;
+  }
+
+  public void setCalorias(Double calorias) {
+    this.calorias = calorias;
+  }
+
+  public List<IngredientesPorPrato> getPratos() {
     return pratos;
   }
 
-  public void setPratos(List<Prato> pratos) {
+  public void setPratos(List<IngredientesPorPrato> pratos) {
     this.pratos = pratos;
   }
 
@@ -88,7 +96,7 @@ public class CategoriaPrato implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    CategoriaPrato other = (CategoriaPrato) obj;
+    Ingrediente other = (Ingrediente) obj;
     if (id == null) {
       if (other.id != null) {
         return false;
@@ -98,4 +106,5 @@ public class CategoriaPrato implements Serializable {
     }
     return true;
   }
+
 }

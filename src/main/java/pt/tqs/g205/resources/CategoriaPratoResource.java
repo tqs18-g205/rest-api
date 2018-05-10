@@ -12,7 +12,7 @@ import pt.tqs.g205.services.CategoriaPratoService;
 import java.util.List;
 
 /**
- * Controlador REST para expor Categorias de Pratos.
+ * Controlador REST para expor Pratos.
  */
 @RestController
 @RequestMapping(value = "/api/categorias")
@@ -22,8 +22,8 @@ public class CategoriaPratoResource {
   private CategoriaPratoService categoriaService;
   
   /**
-   * Endpoint para conseguir todos os pratos.
-   * @return JSON com descricao de todos os pratos.
+   * Obter todos os pratos.
+   * @return lista de todos os pratos.
    */
   @RequestMapping(value = "/pratos", method = RequestMethod.GET)
   public ResponseEntity<List<CategoriaPrato>> getAll() {
