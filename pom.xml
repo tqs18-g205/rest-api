@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pt.tqs.g205</groupId>
-	<artifactId>commits</artifactId>
+	<artifactId>restapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>commits</name>
+	<name>restapi</name>
 	<description>TQS REST API</description>
 
 	<parent>
