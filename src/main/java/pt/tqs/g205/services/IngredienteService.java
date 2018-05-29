@@ -16,9 +16,10 @@ public class IngredienteService {
 
   @Autowired
   private IngredienteRepository ingredienteRepo;
-  
+
   /**
    * Obter todos os ingredientes.
+   * 
    * @return lista de ingredientes.
    */
   public List<Ingrediente> getAll() {

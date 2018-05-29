@@ -20,9 +20,10 @@ public class IngredientesPorPratoPk implements Serializable {
   private Integer ingredienteId;
 
   public IngredientesPorPratoPk() {}
-  
+
   /**
    * Construtor.
+   * 
    * @param pratoId id do prato.
    * @param ingredienteId id do ingrediente.
    */
@@ -84,6 +85,11 @@ public class IngredientesPorPratoPk implements Serializable {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "IngredientesPorPratoPk [pratoId=" + pratoId + ", ingredienteId=" + ingredienteId + "]";
   }
 
 

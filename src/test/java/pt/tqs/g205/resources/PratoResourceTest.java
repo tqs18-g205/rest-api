@@ -18,14 +18,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import pt.tqs.g205.RestapiApplication;
+import pt.tqs.g205.CommitsApplication;
 import pt.tqs.g205.domain.Prato;
 import pt.tqs.g205.services.PratoService;
 
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = RestapiApplication.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = CommitsApplication.class)
 @AutoConfigureMockMvc
 public class PratoResourceTest {
   @Autowired
@@ -36,7 +36,7 @@ public class PratoResourceTest {
 
   @InjectMocks
   private PratoResource pratoResource;
-  
+
   /**
    * Setup dos testes.
    */

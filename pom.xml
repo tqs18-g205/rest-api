@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pt.tqs.g205</groupId>
-	<artifactId>restapi</artifactId>
+	<artifactId>commits</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>restapi</name>
+	<name>commits</name>
 	<description>TQS REST API</description>
 
 	<parent>
@@ -44,6 +44,19 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.9.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -52,60 +65,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-			<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-checkstyle-plugin</artifactId>
-		        <version>3.0.0</version>
-		        <configuration>
-		            <failsOnError>true</failsOnError>
-		            <failOnViolation>true</failOnViolation>
-		            <violationSeverity>warning</violationSeverity>
-		            <includeTestSourceDirectory>true</includeTestSourceDirectory>
-		            <consoleOutput>true</consoleOutput>
-		            <configLocation>google_checks.xml</configLocation>
-		        </configuration>
-		        <executions>
-		         <execution>
-		            <phase>verify</phase>
-		            <goals>
-		                <goal>check</goal>
-		            </goals>
-		         </execution>
-		        </executions>
-	    	</plugin>
 		</plugins>
-		<extensions>
-		  <extension>
-		    <groupId>org.kuali.maven.wagons</groupId>
-		    <artifactId>maven-s3-wagon</artifactId>
-		    <version>1.2.1</version>
-		  </extension>
-	 	</extensions>
 	</build>
-	
-	<distributionManagement>
-	    <site>
-	        <id>s3.site</id>
-	        <url>s3://tqs-go-nutri</url>
-	    </site>
-	</distributionManagement>
-	
-	<reporting>
-      <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-            <failsOnError>true</failsOnError>
-            <failOnViolation>true</failOnViolation>
-            <violationSeverity>warning</violationSeverity>
-            <includeTestSourceDirectory>true</includeTestSourceDirectory>
-            <consoleOutput>true</consoleOutput>
-            <configLocation>google_checks.xml</configLocation>
-        </configuration>
-    </plugin>
-    </plugins>
-  </reporting>
+
+
 </project>

@@ -20,9 +20,10 @@ public class IngredienteResource {
 
   @Autowired
   private IngredienteService ingredienteService;
-  
+
   /**
    * Endpoint para obter todos os ingredientes.
+   * 
    * @return todos os ingredientes.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)

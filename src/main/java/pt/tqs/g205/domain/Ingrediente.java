@@ -31,9 +31,10 @@ public class Ingrediente implements Serializable {
   private List<IngredientesPorPrato> pratos = new ArrayList<>();
 
   public Ingrediente() {}
-  
+
   /**
    * Construtor.
+   * 
    * @param id id do ingrediente.
    * @param nome nome do ingrediente.
    * @param calorias calorias por 100g de ingrediente.

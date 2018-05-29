@@ -44,9 +44,10 @@ public class Prato implements Serializable {
   private List<IngredientesPorPrato> ingredientes = new ArrayList<>();
 
   public Prato() {}
-  
+
   /**
    * Constructor.
+   * 
    * @param id id do prato.
    * @param nome nome do prato.
    * @param preco preco do prato.
@@ -60,9 +61,10 @@ public class Prato implements Serializable {
     this.imagem = imagem;
     this.calorias = 0.0;
   }
-  
+
   /**
    * Calcular calorias totais do prato.
+   * 
    * @return calorias totais.
    */
   public Double calcularCalorias() {
@@ -132,9 +134,10 @@ public class Prato implements Serializable {
   public List<IngredientesPorPrato> getIngredientes() {
     return ingredientes;
   }
-  
+
   /**
    * Atribui ingredientes ao prato e calcula calorias totais.
+   * 
    * @param ingredientes lista de ingredientes.
    */
   public void setIngredientes(List<IngredientesPorPrato> ingredientes) {

@@ -23,9 +23,10 @@ public class PratoService {
 
   @Autowired
   private IngredientesPorPratoRepository ingredientesPorPratoRepo;
-  
+
   /**
    * Obter todos os pratos.
+   * 
    * @return lista de todos os pratos.
    */
   public List<Prato> getAll() {
@@ -35,9 +36,10 @@ public class PratoService {
 
     return pratos;
   }
-  
+
   /**
    * Obter um prato por id.
+   * 
    * @param id id do prato.
    * @return prato filtrado.
    */
@@ -47,26 +49,24 @@ public class PratoService {
     if (prato == null) {
       throw new NoSuchElementException();
     }
-    
+
     List<IngredientesPorPrato> ingredientesPorPrato = ingredientesPorPratoRepo.findByPratoId(id);
 
     prato.setIngredientes(ingredientesPorPrato);
 
     return prato;
   }
-  
+
   /**
    * Obter pratos pelo numero de calorias.
+   * 
    * @param value valor maximo de calorias.
    * @return lista de pratos filtrados.
    */
   public List<Prato> getByCalorias(Double value) {
     List<Prato> pratos = pratoRepo.findAll();
 
-    return pratos
-        .stream()
-        .filter(e -> e.getCalorias() <= value)
-        .collect(Collectors.toList());
+    return pratos.stream().filter(e -> e.getCalorias() <= value).collect(Collectors.toList());
   }
 
 }
