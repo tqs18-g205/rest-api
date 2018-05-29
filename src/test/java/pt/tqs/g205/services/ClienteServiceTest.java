@@ -18,7 +18,7 @@ import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
-import pt.tqs.g205.security.ClienteSS;
+import pt.tqs.g205.security.ClienteSs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +76,7 @@ public class ClienteServiceTest {
         .thenReturn(Collections.singletonList(morada));
 
     Mockito.when(userService.authenticated())
-        .thenReturn(new ClienteSS(1, "chico@matos.pt", "1234"));
+        .thenReturn(new ClienteSs(1, "chico@matos.pt", "1234"));
   }
 
   @Test

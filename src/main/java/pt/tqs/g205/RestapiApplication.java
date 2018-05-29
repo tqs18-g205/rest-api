@@ -25,7 +25,7 @@ import java.util.Arrays;
 public class RestapiApplication implements CommandLineRunner {
 
   @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private BCryptPasswordEncoder beCryptPasswordEncoder;
 
   @Autowired
   private CategoriaPratoRepository categoriaPratoRepo;
