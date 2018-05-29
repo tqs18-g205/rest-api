@@ -59,14 +59,68 @@
 		
 	</dependencies>
 
-	<build>
+		<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-checkstyle-plugin</artifactId>
+		        <version>3.0.0</version>
+		        <configuration>
+		            <failsOnError>true</failsOnError>
+		            <failOnViolation>true</failOnViolation>
+		            <violationSeverity>warning</violationSeverity>
+		            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+		            <consoleOutput>true</consoleOutput>
+		            <configLocation>google_checks.xml</configLocation>
+		        </configuration>
+		        <executions>
+		         <execution>
+		            <phase>verify</phase>
+		            <goals>
+		                <goal>check</goal>
+		            </goals>
+		         </execution>
+		        </executions>
+	    	</plugin>
 		</plugins>
+		<extensions>
+		  <extension>
+		    <groupId>org.kuali.maven.wagons</groupId>
+		    <artifactId>maven-s3-wagon</artifactId>
+		    <version>1.2.1</version>
+		  </extension>
+	 	</extensions>
 	</build>
+	
+	<distributionManagement>
+	    <site>
+	        <id>s3.site</id>
+	        <url>s3://tqs-go-nutri</url>
+	    </site>
+	</distributionManagement>
+	
+	<reporting>
+      <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+            <failsOnError>true</failsOnError>
+            <failOnViolation>true</failOnViolation>
+            <violationSeverity>warning</violationSeverity>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <consoleOutput>true</consoleOutput>
+            <configLocation>google_checks.xml</configLocation>
+        </configuration>
+    </plugin>
+    </plugins>
+  </reporting>
 
 
 </project>
