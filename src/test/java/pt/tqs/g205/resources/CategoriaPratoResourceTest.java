@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import pt.tqs.g205.CommitsApplication;
+import pt.tqs.g205.RestapiApplication;
 import pt.tqs.g205.domain.CategoriaPrato;
 import pt.tqs.g205.services.CategoriaPratoService;
 
@@ -26,7 +26,7 @@ import java.util.Collections;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = CommitsApplication.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = RestapiApplication.class)
 @AutoConfigureMockMvc
 public class CategoriaPratoResourceTest {
   @Autowired

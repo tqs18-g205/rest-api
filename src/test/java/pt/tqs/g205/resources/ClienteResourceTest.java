@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import pt.tqs.g205.CommitsApplication;
+import pt.tqs.g205.RestapiApplication;
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.resources.models.MoradaModel;
@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = CommitsApplication.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = RestapiApplication.class)
 @AutoConfigureMockMvc
 public class ClienteResourceTest {
   @Autowired
