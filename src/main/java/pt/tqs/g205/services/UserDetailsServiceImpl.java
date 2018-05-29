@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.repositories.ClienteRepository;
-import pt.tqs.g205.security.ClienteSS;
+import pt.tqs.g205.security.ClienteSs;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       throw new UsernameNotFoundException(username);
     }
 
-    return new ClienteSS(cli.getId(), cli.getEmail(), cli.getPasswd());
+    return new ClienteSs(cli.getId(), cli.getEmail(), cli.getPasswd());
   }
 
 }

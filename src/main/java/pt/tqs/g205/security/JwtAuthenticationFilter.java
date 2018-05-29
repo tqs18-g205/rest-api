@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
           creds.getUsername(), creds.getPasswd(), new ArrayList<>());
       return authenticationManager.authenticate(authToken);
-    } catch (IOException e) {
+    } catch (IOException exc) {
       throw new AuthorizationException("Access Denied");
     }
 
@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   @Override
   public void successfulAuthentication(HttpServletRequest req, HttpServletResponse res,
       FilterChain chain, Authentication auth) throws IOException, ServletException {
-    String username = ((ClienteSS) auth.getPrincipal()).getUsername();
+    String username = ((ClienteSs) auth.getPrincipal()).getUsername();
     String token = jwtUtil.generateToken(username);
     res.addHeader("Authorization", "Bearer " + token);
   }

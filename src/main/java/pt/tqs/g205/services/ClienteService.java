@@ -10,7 +10,7 @@ import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
-import pt.tqs.g205.security.ClienteSS;
+import pt.tqs.g205.security.ClienteSs;
 import pt.tqs.g205.services.exceptions.AuthorizationException;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.Optional;
 @Service
 public class ClienteService {
   @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private BCryptPasswordEncoder beCryptPasswordEncoder;
 
   @Autowired
   private ClienteRepository clienteRepo;
@@ -53,7 +53,7 @@ public class ClienteService {
    */
   public Cliente registerCliente(RegistoClienteModel cliente) {
     Cliente cli = new Cliente(null, cliente.getNome(),
-        bCryptPasswordEncoder.encode(cliente.getPasswd()), cliente.getNif(), cliente.getEmail());
+        beCryptPasswordEncoder.encode(cliente.getPasswd()), cliente.getNif(), cliente.getEmail());
     clienteRepo.saveAll(Arrays.asList(cli));
     List<MoradaModel> models = cliente.getMoradas();
     List<Morada> moradas = new ArrayList<>();
@@ -76,7 +76,7 @@ public class ClienteService {
    * @throws NoSuchElementException se o id não existir na base de dados.
    */
   public Cliente getById(Integer id) {
-    ClienteSS client = userService.authenticated();
+    ClienteSs client = userService.authenticated();
 
     if (client == null || !id.equals(client.getId())) {
       throw new AuthorizationException("Access denied");

@@ -11,12 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-
+  /**
+   * Handler para exceção de autorização.
+   * @param exc Exceção de autorização.
+   * @param request Http Request.
+   * @return resposta de erro.
+   */
   @ExceptionHandler(AuthorizationException.class)
-  public ResponseEntity<StandardError> authorization(AuthorizationException e,
+  public ResponseEntity<StandardError> authorization(AuthorizationException exc,
       HttpServletRequest request) {
     StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),
-        "Access Denied", e.getMessage(), request.getRequestURI());
+        "Access Denied", exc.getMessage(), request.getRequestURI());
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
   }
 }

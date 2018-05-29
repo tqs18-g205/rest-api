@@ -8,8 +8,8 @@ public class AuthorizationException extends RuntimeException {
     super(msg);
   }
 
-  public AuthorizationException(String msg, Throwable t) {
-    super(msg, t);
+  public AuthorizationException(String msg, Throwable thr) {
+    super(msg, thr);
   }
 
 }

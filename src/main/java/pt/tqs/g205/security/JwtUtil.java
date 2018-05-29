@@ -17,13 +17,23 @@ public class JwtUtil {
 
   @Value("${jwt.expiration}")
   private Long expiration;
-
+  
+  /**
+   * Gera um token a partir do email do utilizador.
+   * @param username email do utilizador.
+   * @return token.
+   */
   public String generateToken(String username) {
     return Jwts.builder().setSubject(username)
         .setExpiration(new Date(System.currentTimeMillis() + expiration))
         .signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
   }
-
+  
+  /**
+   * Verifica se o token passado é válido.
+   * @param token token.
+   * @return verdadeiro se token for válido.
+   */
   public boolean validToken(String token) {
     Claims claims = getClaims(token);
     if (claims != null) {
@@ -41,11 +51,16 @@ public class JwtUtil {
   private Claims getClaims(String token) {
     try {
       return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
-    } catch (Exception e) {
+    } catch (Exception exc) {
       return null;
     }
   }
 
+  /**
+   * Restaura username a partir de token.
+   * @param token token.
+   * @return email do user.
+   */
   public String getUsername(String token) {
     Claims claims = getClaims(token);
     if (claims != null) {

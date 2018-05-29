@@ -11,6 +11,14 @@ public class StandardError implements Serializable {
   private String message;
   private String path;
 
+  /**
+   * Erro padrão.
+   * @param timestamp timestamp.
+   * @param status estado de erro.
+   * @param error nome do erro.
+   * @param message mensagem de erro.
+   * @param path path do endpoint.
+   */
   public StandardError(Long timestamp, Integer status, String error, String message, String path) {
     super();
     this.timestamp = timestamp;

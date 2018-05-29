@@ -18,6 +18,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
   private JwtUtil jwtUtil;
   private UserDetailsService userDetailsService;
 
+  /**
+   * Constructor.
+   * @param authenticationManager authentication manager.
+   * @param jwtUtil instancia de JwtUtil.
+   * @param userDetailsService instancia de UserDetailsService.
+   */
   public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil,
       UserDetailsService userDetailsService) {
     super(authenticationManager);

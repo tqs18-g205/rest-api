@@ -13,7 +13,14 @@ public class MoradaModel implements Serializable {
   public MoradaModel() {
     super();
   }
-
+  
+  /**
+   * Constructor.
+   * @param rua nome da rua.
+   * @param localidade localidade.
+   * @param codigoPostal código postal.
+   * @param distrito distrito.
+   */
   public MoradaModel(String rua, String localidade, String codigoPostal, String distrito) {
     super();
     this.rua = rua;

@@ -20,7 +20,14 @@ public class RegistoClienteModel implements Serializable {
   public RegistoClienteModel() {
     super();
   }
-
+  
+  /**
+   * Constructor.
+   * @param nome nome do cliente.
+   * @param passwd palavra-chave do cliente.
+   * @param nif nif do cliente.
+   * @param email email do cliente.
+   */
   public RegistoClienteModel(String nome, String passwd, String nif, String email) {
     super();
     this.nome = nome;
