@@ -19,15 +19,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import pt.tqs.g205.RestapiApplication;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import pt.tqs.g205.CommitsApplication;
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.security.JwtUtil;
 import pt.tqs.g205.services.ClienteService;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Arrays;
 

@@ -15,13 +15,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.security.JwtUtil;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Arrays;
 
