@@ -39,9 +39,10 @@ public class IngredientesPorPrato implements Serializable {
   private Double quantidade;
 
   public IngredientesPorPrato() {}
-  
+
   /**
    * Construtor.
+   * 
    * @param prato prato.
    * @param ingrediente ingrediente a adicionar.
    * @param quantidade quantidade de ingrediente.

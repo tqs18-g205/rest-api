@@ -20,9 +20,10 @@ public class CategoriaPratoResource {
 
   @Autowired
   private CategoriaPratoService categoriaService;
-  
+
   /**
    * Obter todos os pratos.
+   * 
    * @return lista de todos os pratos.
    */
   @RequestMapping(value = "/pratos", method = RequestMethod.GET)

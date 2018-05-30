@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import pt.tqs.g205.domain.CategoriaPrato;
@@ -12,7 +12,7 @@ import pt.tqs.g205.domain.CategoriaPrato;
 import java.util.Collection;
 import java.util.Optional;
 
-@DataJpaTest
+@SpringBootTest
 @RunWith(SpringRunner.class)
 public class CategoriaPratoRepositoryTest {
 
@@ -30,7 +30,7 @@ public class CategoriaPratoRepositoryTest {
 
   @Test
   public void findById() {
-    CategoriaPrato cat = categoriaRepo.save(new CategoriaPrato(null, "Italiano"));
+    CategoriaPrato cat = categoriaRepo.save(new CategoriaPrato(null, "Asiatico"));
     Optional<CategoriaPrato> categoria = categoriaRepo.findById(cat.getId());
     Assertions.assertThat(categoria.get().getId()).isEqualTo(cat.getId());
 

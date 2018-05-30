@@ -18,9 +18,10 @@ public class CategoriaPratoService {
 
   @Autowired
   private CategoriaPratoRepository categoriaRepo;
-  
+
   /**
    * Obter todos os pratos.
+   * 
    * @return lista de todos os pratos.
    */
   public List<CategoriaPrato> getAll() {
@@ -28,15 +29,16 @@ public class CategoriaPratoService {
     categorias.forEach(e -> e.setPratos(null));
     return categorias;
   }
-  
+
   /**
    * Obter um prato por id.
+   * 
    * @param id id do prato.
    * @return objeto de Prato.
    */
   public CategoriaPrato getById(Integer id) {
     Optional<CategoriaPrato> cat = categoriaRepo.findById(id);
-    
+
     if (!cat.isPresent()) {
       throw new NoSuchElementException();
     }

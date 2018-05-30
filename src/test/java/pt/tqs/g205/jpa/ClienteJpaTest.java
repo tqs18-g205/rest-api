@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import pt.tqs.g205.domain.CategoriaPrato;
+import pt.tqs.g205.domain.Cliente;
 
 @SpringBootTest
 @AutoConfigureDataJpa
@@ -20,17 +20,17 @@ import pt.tqs.g205.domain.CategoriaPrato;
 @AutoConfigureTestEntityManager
 @Transactional
 @RunWith(SpringRunner.class)
-public class CategoriaPratoJpaTest {
-
+public class ClienteJpaTest {
   @Autowired
   private TestEntityManager tem;
 
   @Test
   public void mapping() {
-    CategoriaPrato cat = new CategoriaPrato(null, "Italiano");
-    CategoriaPrato persisted = tem.persistAndFlush(cat);
+    Cliente cli = new Cliente(null, "John Doe", "1223", "999999999", "john@doe.com");
+
+    Cliente persisted = tem.persistAndFlush(cli);
     Assertions.assertThat(persisted.getId()).isNotNull();
-    Assertions.assertThat(persisted.getId()).isGreaterThan(0);
-    Assertions.assertThat(persisted.getNome()).isEqualTo("Italiano");
+    Assertions.assertThat(persisted.getId()).isNotZero();
+
   }
 }

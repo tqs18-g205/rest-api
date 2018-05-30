@@ -33,9 +33,10 @@ public class CategoriaPrato implements Serializable {
   private List<Prato> pratos = new ArrayList<>();
 
   public CategoriaPrato() {}
-  
+
   /**
    * Construtor.
+   * 
    * @param id id da categoria.
    * @param name nome do prato.
    */

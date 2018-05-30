@@ -37,7 +37,7 @@ public class CategoriaPratoResourceTest {
 
   @InjectMocks
   private CategoriaPratoResource categoriaResource;
-  
+
   /**
    * Setup dos testes.
    */

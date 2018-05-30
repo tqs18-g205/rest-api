@@ -36,7 +36,7 @@ public class IngredienteResourceTest {
 
   @InjectMocks
   private IngredienteResource ingredienteResource;
-  
+
   /**
    * Setup dos testes.
    */

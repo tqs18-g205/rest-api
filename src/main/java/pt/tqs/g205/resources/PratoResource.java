@@ -21,9 +21,10 @@ public class PratoResource {
 
   @Autowired
   private PratoService pratoService;
-  
+
   /**
    * Endpoint para obter todos os pratos.
+   * 
    * @return todos os pratos.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)
@@ -32,9 +33,10 @@ public class PratoResource {
 
     return ResponseEntity.ok(pratos);
   }
-  
+
   /**
    * Endpoint para obter detalhes de um prato por id.
+   * 
    * @param id id do prato.
    * @return detalhes do prato.
    */
@@ -46,9 +48,10 @@ public class PratoResource {
 
     return ResponseEntity.ok(prato);
   }
-  
+
   /**
    * Endpoint para obter por pratos pelas calorias.
+   * 
    * @param value calorias maximas.
    * @return lista de pratos filtrados.
    */
