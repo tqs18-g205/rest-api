@@ -109,7 +109,8 @@ public class ClienteResourceIntegrationTest {
   public void getReservasCliente() throws Exception {
     String token = jwtUtil.generateToken(cli.getEmail());
     this.mockMvc.perform(
-        MockMvcRequestBuilders.get("/api/clientes/1/reservas").header("Authorization", "Bearer " + token))
+        MockMvcRequestBuilders.get("/api/clientes/1/reservas")
+        .header("Authorization", "Bearer " + token))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
