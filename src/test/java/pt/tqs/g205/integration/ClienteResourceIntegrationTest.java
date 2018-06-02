@@ -24,7 +24,6 @@ import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.security.JwtUtil;
 
-
 import java.util.Arrays;
 
 @SpringBootTest
@@ -103,6 +102,14 @@ public class ClienteResourceIntegrationTest {
         MockMvcRequestBuilders.post("/api/clientes/1/reservas")
         .header("Authorization", "Bearer " + token)
         .contentType(MediaType.APPLICATION_JSON_UTF8).content(reservaJson))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+  
+  @Test
+  public void getReservasCliente() throws Exception {
+    String token = jwtUtil.generateToken(cli.getEmail());
+    this.mockMvc.perform(
+        MockMvcRequestBuilders.get("/api/clientes/1/reservas").header("Authorization", "Bearer " + token))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 

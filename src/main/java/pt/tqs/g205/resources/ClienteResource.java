@@ -15,6 +15,8 @@ import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.services.ClienteService;
 import pt.tqs.g205.services.ReservaService;
 
+import java.util.List;
+
 /**
  * Controlador REST para expôr serviços aos Clientes.
  */
@@ -66,6 +68,18 @@ public class ClienteResource {
 
     return ResponseEntity.ok(res);
 
+  }
+  
+  /**
+   * Endpoint para obter as reservas de um cliente.
+   * @param id id do cliente.
+   * @return lista de reservas do cliente.
+   */
+  @RequestMapping(value = "/{id}/reservas", method = RequestMethod.GET)
+  public ResponseEntity<List<Reserva>> getReservasCliente(@PathVariable("id") Integer id) {
+    List<Reserva> reservas = reservaService.getByClienteId(id);
+
+    return ResponseEntity.ok(reservas);
   }
 
 }

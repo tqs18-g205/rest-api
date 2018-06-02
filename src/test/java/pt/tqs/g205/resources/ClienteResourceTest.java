@@ -37,6 +37,7 @@ import pt.tqs.g205.services.ReservaService;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Collections;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = RestapiApplication.class)
@@ -125,6 +126,17 @@ public class ClienteResourceTest {
         MockMvcRequestBuilders.post("/api/clientes/1/reservas")
         .header("Authorization", "Bearer " + token)
         .contentType(MediaType.APPLICATION_JSON_UTF8).content(reservaJson))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+  
+  @Test
+  public void getReservasCliente() throws Exception {
+    Mockito.when(reservaService.getByClienteId(1))
+      .thenReturn(Collections.singletonList(reserva));
+    
+    String token = jwtUtil.generateToken(cli.getEmail());
+    this.mockMvc.perform(
+        MockMvcRequestBuilders.get("/api/clientes/1/reservas").header("Authorization", "Bearer " + token))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 

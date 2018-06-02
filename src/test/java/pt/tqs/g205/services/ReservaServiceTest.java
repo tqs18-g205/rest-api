@@ -21,6 +21,8 @@ import pt.tqs.g205.security.ClienteSs;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -61,6 +63,9 @@ public class ReservaServiceTest {
     
     Mockito.when(reservaRepo.save(new Reserva(null, cli, res, date, time)))
       .thenReturn(new Reserva(1, cli, res, date, time));
+    
+    Mockito.when(reservaRepo.getByCliente(cli))
+      .thenReturn(Collections.singletonList(new Reserva(1, cli, res, date, time)));
   }
   
   @Test
@@ -69,5 +74,15 @@ public class ReservaServiceTest {
     Assertions.assertThat(reserva).isNotNull();
     Assertions.assertThat(reserva.getCliente()).isEqualTo(cli);
     Assertions.assertThat(reserva.getRestaurante()).isEqualTo(res);
+  }
+  
+  @Test
+  public void getByClientId() {
+    List<Reserva> reservas = reservaService.getByClienteId(1);
+    Assertions.assertThat(reservas).isNotNull();
+    Assertions.assertThat(reservas).isNotEmpty();
+    Reserva res = reservas.iterator().next();
+    Assertions.assertThat(res).isNotNull();
+    Assertions.assertThat(res.getCliente().getId()).isEqualTo(1);
   }
 }
