@@ -59,7 +59,7 @@ public class ClienteService {
     List<Morada> moradas = new ArrayList<>();
     models.forEach(m -> {
       Morada temp = new Morada(null, m.getRua(), m.getLocalidade(), m.getCodigoPostal(),
-          m.getDistrito(), cli);
+          m.getDistrito(), cli, null);
       moradas.add(temp);
     });
     moradaRepo.saveAll(moradas);

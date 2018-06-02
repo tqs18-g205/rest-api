@@ -1,25 +1,27 @@
 package pt.tqs.g205.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * Clientes.
+ * Restaurantes.
  */
 @Entity
-public class Cliente implements Serializable {
+public class Restaurante implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -27,41 +29,42 @@ public class Cliente implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String nome;
-  private String nif;
-
-  @Column(unique = true)
-  private String email;
-
-  @JsonIgnore
-  private String passwd;
 
   @JsonManagedReference
-  @OneToMany(mappedBy = "cliente")
-  private List<Morada> moradas = new ArrayList<>();
-  
-  @JsonBackReference
-  @OneToMany(mappedBy = "cliente")
-  private List<Reserva> reservas = new ArrayList<>();
+  @ManyToOne
+  private TipoCozinha tipoCozinha;
 
-  public Cliente() {
-    super();
-  }
+  @JsonManagedReference
+  @OneToMany(mappedBy = "restaurante")
+  private List<Prato> pratos = new ArrayList<>();
+
+  @JsonManagedReference
+  @ManyToMany
+  @JoinTable(name = "Restaurante_Tipos_Entrega", joinColumns = @JoinColumn(name = "restaurante_id"),
+      inverseJoinColumns = @JoinColumn(name = "tipo_entrega_id"))
+  private List<TipoEntrega> tiposEntrega = new ArrayList<>();
+
+  @JsonBackReference
+  @OneToMany(mappedBy = "restaurante")
+  private List<Reserva> reservas = new ArrayList<>();
+  
+  @JsonManagedReference
+  @OneToMany(mappedBy = "restaurante")
+  private List<Morada> moradas = new ArrayList<>();
+
+  public Restaurante() {}
 
   /**
-   * Constructor,
-   * 
-   * @param id id do Cliente (autogerado pelo Hibernate).
-   * @param nome nome do Cliente.
-   * @param passwd password do Cliente.
-   * @param nif Número de Identificação Fiscal.
+   * Constructor.
+   * @param id id do restaurante.
+   * @param nome nome do restaurante.
+   * @param tipoCozinha tipo de culinária.
    */
-  public Cliente(Integer id, String nome, String passwd, String nif, String email) {
+  public Restaurante(Integer id, String nome, TipoCozinha tipoCozinha) {
     super();
     this.id = id;
     this.nome = nome;
-    this.passwd = passwd;
-    this.nif = nif;
-    this.email = email;
+    this.tipoCozinha = tipoCozinha;
   }
 
   public Integer getId() {
@@ -80,20 +83,12 @@ public class Cliente implements Serializable {
     this.nome = nome;
   }
 
-  public String getNif() {
-    return nif;
+  public List<Prato> getPratos() {
+    return pratos;
   }
 
-  public void setNif(String nif) {
-    this.nif = nif;
-  }
-
-  public String getPasswd() {
-    return passwd;
-  }
-
-  public void setPasswd(String passwd) {
-    this.passwd = passwd;
+  public void setPratos(List<Prato> pratos) {
+    this.pratos = pratos;
   }
 
   public List<Reserva> getReservas() {
@@ -104,22 +99,28 @@ public class Cliente implements Serializable {
     this.reservas = reservas;
   }
 
+  public List<TipoEntrega> getTiposEntrega() {
+    return tiposEntrega;
+  }
+
+  public void setTiposEntrega(List<TipoEntrega> tiposEntrega) {
+    this.tiposEntrega = tiposEntrega;
+  }
+
+  public TipoCozinha getTipoCozinha() {
+    return tipoCozinha;
+  }
+
+  public void setTipoCozinha(TipoCozinha tipoCozinha) {
+    this.tipoCozinha = tipoCozinha;
+  }
+
   public List<Morada> getMoradas() {
     return moradas;
   }
 
   public void setMoradas(List<Morada> moradas) {
     this.moradas = moradas;
-  }
-
-
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   @Override
@@ -141,7 +142,7 @@ public class Cliente implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    Cliente other = (Cliente) obj;
+    Restaurante other = (Restaurante) obj;
     if (id == null) {
       if (other.id != null) {
         return false;
@@ -151,7 +152,5 @@ public class Cliente implements Serializable {
     }
     return true;
   }
-
-
 
 }

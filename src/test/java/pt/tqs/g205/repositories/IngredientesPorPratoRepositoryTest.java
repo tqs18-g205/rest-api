@@ -32,7 +32,7 @@ public class IngredientesPorPratoRepositoryTest {
     Ingrediente i1 = new Ingrediente(null, "Arroz", 50.0);
 
     Prato p1 = new Prato(null, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
 
     IngredientesPorPrato ipp1 = new IngredientesPorPrato(p1, i1, 300.0);
     i1.setPratos(Arrays.asList(ipp1));

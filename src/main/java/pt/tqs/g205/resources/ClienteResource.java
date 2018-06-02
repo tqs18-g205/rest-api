@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pt.tqs.g205.domain.Cliente;
+import pt.tqs.g205.domain.Reserva;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
+import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.services.ClienteService;
+import pt.tqs.g205.services.ReservaService;
 
 /**
  * Controlador REST para expôr serviços aos Clientes.
@@ -21,10 +24,12 @@ public class ClienteResource {
 
   @Autowired
   private ClienteService clienteService;
+  
+  @Autowired
+  private ReservaService reservaService;
 
   /**
    * Endpoint para registar clientes.
-   * 
    * @return dados do cliente registado.
    */
   @RequestMapping(value = "", method = RequestMethod.POST)
@@ -36,7 +41,6 @@ public class ClienteResource {
 
   /**
    * Endpoint para obter os dados de um cliente específico.
-   * 
    * @param id id do cliente.
    * @return dados do cliente.
    */
@@ -46,6 +50,22 @@ public class ClienteResource {
 
     return ResponseEntity.ok(cliente);
   }
+  
 
+  /**
+   * Endpoint para criar uma nova reserva.
+   * @param id id do cliente que faz a reserva.
+   * @param reserva dados da reserva.
+   * @return instancia da reserva criada.
+   */
+  @RequestMapping(value = "/{id}/reservas", method = RequestMethod.POST)
+  public ResponseEntity<Reserva> criarReserva(@PathVariable("id") Integer id,
+      @RequestBody ReservaModel reserva) {
+    Reserva res = reservaService.fazerReserva(reserva.getCliente(), reserva.getRestaurante(),
+        reserva.getData(), reserva.getHora());
+
+    return ResponseEntity.ok(res);
+
+  }
 
 }

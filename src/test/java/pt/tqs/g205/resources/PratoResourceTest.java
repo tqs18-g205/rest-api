@@ -50,7 +50,7 @@ public class PratoResourceTest {
   @Test
   public void getAll() throws Exception {
     Prato p1 = new Prato(1, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Mockito.when(pratoService.getAll()).thenReturn(Collections.singletonList(p1));
 
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/pratos"))
@@ -63,7 +63,7 @@ public class PratoResourceTest {
   @Test
   public void getPrato() throws Exception {
     Prato p1 = new Prato(1, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Mockito.when(pratoService.getPratoById(1)).thenReturn(p1);
 
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/pratos/1"))
@@ -76,7 +76,7 @@ public class PratoResourceTest {
   @Test
   public void getPratosByCategorias() throws Exception {
     Prato p1 = new Prato(1, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Mockito.when(pratoService.getByCalorias(500.0)).thenReturn(Collections.singletonList(p1));
 
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/pratos/calorias/500"))

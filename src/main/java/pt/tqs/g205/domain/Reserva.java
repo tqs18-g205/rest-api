@@ -1,8 +1,10 @@
 package pt.tqs.g205.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,55 +13,50 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 /**
- * Morada.
+ * Reservas.
  */
 @Entity
-public class Morada implements Serializable {
+public class Reserva implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private String rua;
-  private String localidade;
-  private String codigoPostal;
-  private String distrito;
 
-  @JsonBackReference
+  @JsonManagedReference
   @ManyToOne
   @JoinColumn(name = "cliente_id")
   private Cliente cliente;
-  
-  @JsonBackReference
+
+  @JsonManagedReference
   @ManyToOne
   @JoinColumn(name = "restaurante_id")
   private Restaurante restaurante;
 
-  public Morada() {}
+  private LocalDate data;
+  private LocalTime time;
 
+  public Reserva() {}
+  
   /**
    * Constructor.
-   * 
-   * @param id id da Morada (autogerado).
-   * @param rua rua.
-   * @param localidade localidade.
-   * @param codigoPostal código zip.
-   * @param distrito distrito.
+   * @param id id da reserva (autogerado).
    * @param cliente cliente.
    * @param restaurante restaurante.
+   * @param data data.
+   * @param time hora.
    */
-  public Morada(Integer id, String rua, String localidade, String codigoPostal, String distrito,
-      Cliente cliente, Restaurante restaurante) {
+  public Reserva(Integer id, Cliente cliente, Restaurante restaurante, LocalDate data,
+      LocalTime time) {
     super();
     this.id = id;
-    this.rua = rua;
-    this.localidade = localidade;
-    this.codigoPostal = codigoPostal;
-    this.distrito = distrito;
     this.cliente = cliente;
     this.restaurante = restaurante;
+    this.data = data;
+    this.time = time;
   }
 
   public Integer getId() {
@@ -70,38 +67,6 @@ public class Morada implements Serializable {
     this.id = id;
   }
 
-  public String getRua() {
-    return rua;
-  }
-
-  public void setRua(String rua) {
-    this.rua = rua;
-  }
-
-  public String getLocalidade() {
-    return localidade;
-  }
-
-  public void setLocalidade(String localidade) {
-    this.localidade = localidade;
-  }
-
-  public String getCodigoPostal() {
-    return codigoPostal;
-  }
-
-  public void setCodigoPostal(String codigoPostal) {
-    this.codigoPostal = codigoPostal;
-  }
-
-  public String getDistrito() {
-    return distrito;
-  }
-
-  public void setDistrito(String distrito) {
-    this.distrito = distrito;
-  }
-
   public Cliente getCliente() {
     return cliente;
   }
@@ -109,8 +74,6 @@ public class Morada implements Serializable {
   public void setCliente(Cliente cliente) {
     this.cliente = cliente;
   }
-  
-  
 
   public Restaurante getRestaurante() {
     return restaurante;
@@ -118,6 +81,22 @@ public class Morada implements Serializable {
 
   public void setRestaurante(Restaurante restaurante) {
     this.restaurante = restaurante;
+  }
+
+  public LocalDate getData() {
+    return data;
+  }
+
+  public void setData(LocalDate data) {
+    this.data = data;
+  }
+
+  public LocalTime getTime() {
+    return time;
+  }
+
+  public void setTime(LocalTime time) {
+    this.time = time;
   }
 
   @Override
@@ -139,7 +118,7 @@ public class Morada implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    Morada other = (Morada) obj;
+    Reserva other = (Reserva) obj;
     if (id == null) {
       if (other.id != null) {
         return false;
@@ -149,6 +128,5 @@ public class Morada implements Serializable {
     }
     return true;
   }
-
 
 }

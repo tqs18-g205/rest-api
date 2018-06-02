@@ -1,5 +1,6 @@
 package pt.tqs.g205.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -42,6 +44,11 @@ public class Prato implements Serializable {
   @JsonManagedReference
   @OneToMany(mappedBy = "ingrediente")
   private List<IngredientesPorPrato> ingredientes = new ArrayList<>();
+  
+  @JsonBackReference
+  @ManyToOne
+  @JoinColumn(name = "restaurante_id")
+  private Restaurante restaurante;
 
   public Prato() {}
 
@@ -53,13 +60,14 @@ public class Prato implements Serializable {
    * @param preco preco do prato.
    * @param imagem url para imagem descritiva do prato.
    */
-  public Prato(Integer id, String nome, Double preco, String imagem) {
+  public Prato(Integer id, String nome, Double preco, String imagem, Restaurante restaurante) {
     super();
     this.id = id;
     this.nome = nome;
     this.preco = preco;
     this.imagem = imagem;
     this.calorias = 0.0;
+    this.restaurante = restaurante;
   }
 
   /**
@@ -120,8 +128,16 @@ public class Prato implements Serializable {
   public void setNome(String nome) {
     this.nome = nome;
   }
+  
+  
 
+  public Restaurante getRestaurante() {
+    return restaurante;
+  }
 
+  public void setRestaurante(Restaurante restaurante) {
+    this.restaurante = restaurante;
+  }
 
   public List<CategoriaPrato> getCategorias() {
     return categorias;

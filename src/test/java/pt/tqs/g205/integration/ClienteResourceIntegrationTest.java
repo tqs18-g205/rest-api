@@ -21,7 +21,9 @@ import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
+import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.security.JwtUtil;
+
 
 import java.util.Arrays;
 
@@ -45,6 +47,8 @@ public class ClienteResourceIntegrationTest {
   private Cliente cli;
   private String json;
   private String token;
+  private ReservaModel reservaModel;
+  private String reservaJson;
 
   /**
    * Setup dos testes.
@@ -57,9 +61,12 @@ public class ClienteResourceIntegrationTest {
     cliente = new RegistoClienteModel("Chico", "1234", "999999888", "john@doe.pt");
     cliente.setMoradas(Arrays.asList(morada));
     cli = clienteRepo.findById(1).get();
+    
+    reservaModel = new ReservaModel(1,1, "31-12-2018", "18:30");
 
     ObjectMapper mapper = new ObjectMapper();
     json = mapper.writeValueAsString(cliente);
+    reservaJson = mapper.writeValueAsString(reservaModel);
 
     token = jwtUtil.generateToken(cli.getEmail());
 
@@ -87,6 +94,16 @@ public class ClienteResourceIntegrationTest {
   public void accessDenied() throws Exception {
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/clientes/1"))
         .andExpect(MockMvcResultMatchers.status().isForbidden());
+  }
+  
+  @Test
+  public void fazerReserva() throws Exception {
+    String token = jwtUtil.generateToken(cli.getEmail());
+    this.mockMvc.perform(
+        MockMvcRequestBuilders.post("/api/clientes/1/reservas")
+        .header("Authorization", "Bearer " + token)
+        .contentType(MediaType.APPLICATION_JSON_UTF8).content(reservaJson))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
 }

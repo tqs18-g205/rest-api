@@ -16,6 +16,7 @@ import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
+import pt.tqs.g205.repositories.ReservaRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.security.ClienteSs;
@@ -26,8 +27,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class ClienteServiceTest {
   @Autowired
   private ClienteService clienteService;
@@ -37,6 +38,9 @@ public class ClienteServiceTest {
 
   @MockBean
   private MoradaRepository moradaRepo;
+  
+  @MockBean
+  private ReservaRepository reservaRepo;
 
   @MockBean
   private UserService userService;
@@ -57,7 +61,7 @@ public class ClienteServiceTest {
   @SuppressWarnings("unchecked")
   @Before
   public void setup() {
-    morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", cli);
+    morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", cli, null);
     clienteModel = new RegistoClienteModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
     model = new MoradaModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
     clienteModel.setMoradas(Arrays.asList(model));
