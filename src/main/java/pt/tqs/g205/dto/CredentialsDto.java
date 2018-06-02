@@ -2,6 +2,9 @@ package pt.tqs.g205.dto;
 
 import java.io.Serializable;
 
+/**
+ * Modelo que representa pedido de login.
+ */
 public class CredentialsDto implements Serializable {
 
   private static final long serialVersionUID = 1L;

@@ -8,7 +8,8 @@ public class IngredientesPorPratoTest {
   @Test
   public void creation() {
     Prato prato = new Prato(3, "Esparguete Bolonhesa", 7.0,
-        "http://www.biodharma.pt/wp-content/uploads/2016/11/esprguete-%C3%A0-bolonhesa-1-370x237.jpg");
+        "http://www.biodharma.pt/wp-content/uploads/2016/11/esprguete-%C3%A0-bolonhesa-1-370x237.jpg",
+        null);
     Ingrediente ing = new Ingrediente(1, "Arroz", 25.0);
 
     IngredientesPorPrato ipp = new IngredientesPorPrato(prato, ing, 20.0);

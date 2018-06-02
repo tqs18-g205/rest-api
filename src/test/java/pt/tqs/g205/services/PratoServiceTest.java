@@ -36,7 +36,7 @@ public class PratoServiceTest {
   @Test
   public void getAll() {
     Prato p1 = new Prato(1, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Mockito.when(pratoRepo.findAll()).thenReturn(Collections.singletonList(p1));
     List<Prato> pratos = pratoService.getAll();
     Assertions.assertThat(pratos).isNotNull();
@@ -50,7 +50,7 @@ public class PratoServiceTest {
   @Test
   public void getPratoById() {
     Prato p1 = new Prato(1, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Mockito.when(pratoRepo.getOne(1)).thenReturn(p1);
     Prato prato = pratoService.getPratoById(1);
     Assertions.assertThat(prato).isNotNull();
@@ -66,7 +66,7 @@ public class PratoServiceTest {
   @Test
   public void getByCalorias() {
     Prato p1 = new Prato(1, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Mockito.when(pratoRepo.findAll()).thenReturn(Collections.singletonList(p1));
     List<Prato> pratos = pratoService.getByCalorias(500.0);
     Assertions.assertThat(pratos).isNotNull();

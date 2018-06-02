@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import pt.tqs.g205.security.ClienteSs;
 
+/**
+ * Servico usado para autenticacao de utilizadores.
+ */
 @Service
 public class UserService {
   /**

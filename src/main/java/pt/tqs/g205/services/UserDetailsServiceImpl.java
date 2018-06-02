@@ -10,6 +10,9 @@ import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.security.ClienteSs;
 
+/**
+ * Implementacao de UserDetailsService (para servicos de autorizacao).
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired

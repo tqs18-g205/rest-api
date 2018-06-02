@@ -18,7 +18,7 @@ public class PratoRepositoryTest {
   @Test
   public void findById() {
     Prato p1 = new Prato(null, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Prato persisted = pratoRepo.save(p1);
     Prato prato = pratoRepo.findById(persisted.getId()).get();
     Assertions.assertThat(prato).isNotNull();

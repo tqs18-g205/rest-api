@@ -45,7 +45,7 @@ public class ClienteServiceIntegrationTest {
    */
   @Before
   public void setup() {
-    morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", cli);
+    morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", cli, null);
     clienteModel = new RegistoClienteModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
     model = new MoradaModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
     clienteModel.setMoradas(Arrays.asList(model));

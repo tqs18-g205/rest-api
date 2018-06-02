@@ -27,7 +27,7 @@ public class PratoJpaTest {
   @Test
   public void mapping() {
     Prato p1 = new Prato(null, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", null);
     Prato persisted = tem.persistAndFlush(p1);
     Assertions.assertThat(persisted.getId()).isNotNull();
     Assertions.assertThat(persisted.getId()).isGreaterThan(0);

@@ -27,7 +27,7 @@ public class MoradaJpaTest {
   @Test
   public void mapping() {
 
-    Morada morada = new Morada(null, "Rua xpto", "Gloria", "3810-555", "Aveiro", null);
+    Morada morada = new Morada(null, "Rua xpto", "Gloria", "3810-555", "Aveiro", null, null);
 
     Morada persisted = tem.persistAndFlush(morada);
     Assertions.assertThat(persisted.getId()).isNotNull();

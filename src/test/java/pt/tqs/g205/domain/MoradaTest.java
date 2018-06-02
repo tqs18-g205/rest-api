@@ -7,7 +7,7 @@ public class MoradaTest {
 
   @Test
   public void creation() {
-    Morada morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", null);
+    Morada morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", null, null);
 
     Assertions.assertThat(morada.getId()).isEqualTo(1);
     Assertions.assertThat(morada.getDistrito()).isEqualTo("Aveiro");

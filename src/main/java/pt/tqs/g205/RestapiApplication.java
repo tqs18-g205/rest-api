@@ -12,13 +12,23 @@ import pt.tqs.g205.domain.Ingrediente;
 import pt.tqs.g205.domain.IngredientesPorPrato;
 import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.domain.Prato;
+import pt.tqs.g205.domain.Reserva;
+import pt.tqs.g205.domain.Restaurante;
+import pt.tqs.g205.domain.TipoCozinha;
+import pt.tqs.g205.domain.TipoEntrega;
 import pt.tqs.g205.repositories.CategoriaPratoRepository;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.repositories.IngredienteRepository;
 import pt.tqs.g205.repositories.IngredientesPorPratoRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
 import pt.tqs.g205.repositories.PratoRepository;
+import pt.tqs.g205.repositories.ReservaRepository;
+import pt.tqs.g205.repositories.RestauranteRepository;
+import pt.tqs.g205.repositories.TipoCozinhaRepository;
+import pt.tqs.g205.repositories.TipoEntregaRepository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -44,6 +54,18 @@ public class RestapiApplication implements CommandLineRunner {
 
   @Autowired
   private MoradaRepository moradaRepo;
+  
+  @Autowired
+  private TipoCozinhaRepository tipoCozinhaRepo;
+  
+  @Autowired
+  private TipoEntregaRepository tipoEntregaRepo;
+  
+  @Autowired
+  private RestauranteRepository restauranteRepo;
+  
+  @Autowired
+  private ReservaRepository reservaRepo;
 
   public static void main(String[] args) {
     SpringApplication.run(RestapiApplication.class, args);
@@ -51,16 +73,29 @@ public class RestapiApplication implements CommandLineRunner {
   
   @Override
   public void run(String... args) throws Exception {
-    Cliente cli = new Cliente(null, "Chico Matos", beCryptPasswordEncoder.encode("1234"),
+    final Cliente cli = new Cliente(null, "Chico Matos", beCryptPasswordEncoder.encode("1234"),
         "999999999", "chicomatos@ua.pt");
-
-    Morada morada = new Morada(null, "Rua xpto", "Aveiro", "3810-610", "Aveiro", cli);
+    
+    final Morada morada = new Morada(null, "Rua xpto", "Aveiro", "3810-610", "Aveiro", cli, null);
 
     clienteRepo.saveAll(Arrays.asList(cli));
     cli.setMoradas(Arrays.asList(morada));
     moradaRepo.saveAll(Arrays.asList(morada));
     clienteRepo.saveAll(Arrays.asList(cli));
 
+    final TipoCozinha tipo1 = new TipoCozinha(null, "Portuguesa");
+    
+    final TipoEntrega entrega1 = new TipoEntrega(1, "Take away");
+    
+    tipoEntregaRepo.saveAll(Arrays.asList(entrega1));
+    
+    final Restaurante res = new Restaurante(null, "O Moliceiro", tipo1);
+    
+    tipoCozinhaRepo.saveAll(Arrays.asList(tipo1));
+    restauranteRepo.saveAll(Arrays.asList(res));
+    tipo1.setRestaurantes(Arrays.asList(res));
+    tipoCozinhaRepo.saveAll(Arrays.asList(tipo1));
+    
     final CategoriaPrato c1 = new CategoriaPrato(null, "Carne");
     final CategoriaPrato c2 = new CategoriaPrato(null, "Peixe");
     final CategoriaPrato c3 = new CategoriaPrato(null, "Vegetariano");
@@ -117,7 +152,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p1 = new Prato(null, "Arroz de pato", 6.5,
-        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg");
+        "https://www.pingodoce.pt/wp-content/uploads/2016/12/arroz-de-pato-617x370.jpg", res);
 
     final IngredientesPorPrato ipp1 = new IngredientesPorPrato(p1, i1, 300.0);
     final IngredientesPorPrato ipp2 = new IngredientesPorPrato(p1, i2, 500.0);
@@ -132,7 +167,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p2 = new Prato(null, "Carapaus fritos com arroz de tomate", 7.0,
-        "http://www.foodfromportugal.com/content/uploads/2018/03/carapaus-fritos-com-arroz-de-tomatexx1-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2018/03/carapaus-fritos-com-arroz-de-tomatexx1-575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp21 = new IngredientesPorPrato(p2, i13, 1000.0);
     final IngredientesPorPrato ipp22 = new IngredientesPorPrato(p2, i1, 300.0);
@@ -149,7 +185,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p3 = new Prato(null, "Migas com entrecosto", 7.0,
-        "http://www.foodfromportugal.com/content/uploads/2016/12/migas-com-entrecosto-1-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2016/12/migas-com-entrecosto-1-575x375.jpg", res);
 
     final IngredientesPorPrato ipp31 = new IngredientesPorPrato(p3, i17, 1000.0);
     final IngredientesPorPrato ipp32 = new IngredientesPorPrato(p3, i16, 60.0);
@@ -165,7 +201,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p4 = new Prato(null, "Polvo à jardineira", 11.0,
-        "http://www.foodfromportugal.com/content/uploads/2016/06/polvo-a-jardineiraxx-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2016/06/polvo-a-jardineiraxx-575x375.jpg", res);
 
     final IngredientesPorPrato ipp41 = new IngredientesPorPrato(p4, i20, 1200.0);
     final IngredientesPorPrato ipp42 = new IngredientesPorPrato(p4, i21, 200.0);
@@ -187,7 +223,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p5 = new Prato(null, "Sopa de cação à alentejana", 6.0,
-        "http://www.foodfromportugal.com/content/uploads/2016/05/sopa-de-cacao-a-alentejanax1-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2016/05/sopa-de-cacao-a-alentejanax1-575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp51 = new IngredientesPorPrato(p5, i22, 700.0);
     final IngredientesPorPrato ipp52 = new IngredientesPorPrato(p5, i16, 50.0);
@@ -204,7 +241,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p6 = new Prato(null, "Assadura à Monchique", 7.0,
-        "http://www.foodfromportugal.com/content/uploads/2015/07/assadura-a-monchiquexx575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2015/07/assadura-a-monchiquexx575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp61 = new IngredientesPorPrato(p6, i23, 400.0);
     final IngredientesPorPrato ipp62 = new IngredientesPorPrato(p6, i24, 10.0);
@@ -220,7 +258,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p7 = new Prato(null, "Bacalhau tradicional", 9.0,
-        "http://www.foodfromportugal.com/content/uploads/2015/05/bacalhau-tradicional-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2015/05/bacalhau-tradicional-575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp71 = new IngredientesPorPrato(p7, i4, 500.0);
     final IngredientesPorPrato ipp72 = new IngredientesPorPrato(p7, i16, 80.0);
@@ -238,7 +277,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p8 = new Prato(null, "Pataniscas de peixe", 6.5,
-        "http://www.foodfromportugal.com/content/uploads/2015/05/pataniscas-de-peixe-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2015/05/pataniscas-de-peixe-575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp81 = new IngredientesPorPrato(p8, i22, 400.0);
     final IngredientesPorPrato ipp82 = new IngredientesPorPrato(p8, i26, 10.0);
@@ -255,7 +295,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p9 = new Prato(null, "Sericaia", 3.5,
-        "http://www.foodfromportugal.com/content/uploads/2014/12/sericaia1-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2014/12/sericaia1-575x375.jpg", res);
 
     final IngredientesPorPrato ipp91 = new IngredientesPorPrato(p9, i27, 350.0);
     final IngredientesPorPrato ipp92 = new IngredientesPorPrato(p9, i24, 5.0);
@@ -273,7 +313,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p10 = new Prato(null, "Coelho estufado com pão frito", 7.0,
-        "http://www.foodfromportugal.com/content/uploads/2014/05/coelho-estufado-com-pao-fritox575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2014/05/coelho-estufado-com-pao-fritox575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp101 = new IngredientesPorPrato(p10, i31, 1200.0);
     final IngredientesPorPrato ipp102 = new IngredientesPorPrato(p10, i15, 100.0);
@@ -291,7 +332,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p11 = new Prato(null, "Tarte de pastel de nata", 2.5,
-        "http://www.foodfromportugal.com/content/uploads/2014/03/tarte-de-pastel-de-nata-1xx575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2014/03/tarte-de-pastel-de-nata-1xx575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp111 = new IngredientesPorPrato(p11, i33, 200.0);
     final IngredientesPorPrato ipp112 = new IngredientesPorPrato(p11, i29, 15.0);
@@ -310,7 +352,8 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p12 = new Prato(null, "Bolo de cacau", 2.5,
-        "http://www.foodfromportugal.com/content/uploads/2018/04/bolo-de-cacau-1-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2018/04/bolo-de-cacau-1-575x375.jpg",
+        res);
 
     final IngredientesPorPrato ipp121 = new IngredientesPorPrato(p12, i34, 70.0);
     final IngredientesPorPrato ipp122 = new IngredientesPorPrato(p12, i28, 150.0);
@@ -329,7 +372,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p13 = new Prato(null, "Pão frito", 2.5,
-        "http://www.foodfromportugal.com/content/uploads/2017/08/pao-frito-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2017/08/pao-frito-575x375.jpg",res);
 
     final IngredientesPorPrato ipp131 = new IngredientesPorPrato(p13, i17, 400.0);
     final IngredientesPorPrato ipp132 = new IngredientesPorPrato(p13, i37, 100.0);
@@ -345,7 +388,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p14 = new Prato(null, "Ovos recheados", 2.5,
-        "http://www.foodfromportugal.com/content/uploads/2015/08/ovos-recheados-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2015/08/ovos-recheados-575x375.jpg",res);
 
     final IngredientesPorPrato ipp141 = new IngredientesPorPrato(p14, i9, 300.0);
     final IngredientesPorPrato ipp142 = new IngredientesPorPrato(p14, i38, 15.0);
@@ -363,7 +406,7 @@ public class RestapiApplication implements CommandLineRunner {
     */
 
     final Prato p15 = new Prato(null, "Camarão simples", 2.5,
-        "http://www.foodfromportugal.com/content/uploads/2014/10/camarao-simples-575x375.jpg");
+        "http://www.foodfromportugal.com/content/uploads/2014/10/camarao-simples-575x375.jpg",res);
 
     final IngredientesPorPrato ipp151 = new IngredientesPorPrato(p15, i41, 300.0);
     final IngredientesPorPrato ipp152 = new IngredientesPorPrato(p15, i15, 50.0);
@@ -375,7 +418,13 @@ public class RestapiApplication implements CommandLineRunner {
     c7.setPratos(Arrays.asList(p15));
     p15.setIngredientes(Arrays.asList(ipp151, ipp152, ipp153, ipp154, ipp155, ipp156));
     p15.setCategorias(Arrays.asList(c7));
-
+    
+    res.setPratos(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15));
+    
+    final Reserva reserva = new Reserva(null, cli, res, LocalDate.of(2018, 9, 1), LocalTime.of(20, 0));
+    
+    
+    restauranteRepo.saveAll(Arrays.asList(res));
     categoriaPratoRepo.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7));
     ingredienteRepo.saveAll(Arrays.asList(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13,
         i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31,
@@ -390,5 +439,7 @@ public class RestapiApplication implements CommandLineRunner {
         ipp115, ipp116, ipp117, ipp121, ipp122, ipp123, ipp124, ipp125, ipp126, ipp127, ipp131,
         ipp132, ipp133, ipp134, ipp141, ipp142, ipp143, ipp144, ipp145, ipp146, ipp151, ipp152,
         ipp153, ipp154, ipp155, ipp156));
+    
+    reservaRepo.saveAll(Arrays.asList(reserva));
   }
 }

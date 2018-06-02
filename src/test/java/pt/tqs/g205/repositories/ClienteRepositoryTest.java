@@ -25,7 +25,7 @@ public class ClienteRepositoryTest {
   public void save() {
     Cliente cli = new Cliente(null, "Chico Matos", "1234", "999999999", "chico@matos.pt");
 
-    Morada morada = new Morada(null, "Rua xpto", "Aveiro", "3810-610", "Aveiro", cli);
+    Morada morada = new Morada(null, "Rua xpto", "Aveiro", "3810-610", "Aveiro", cli, null);
 
     Cliente cliente = clienteRepo.save(cli);
     cliente.setMoradas(Arrays.asList(morada));
