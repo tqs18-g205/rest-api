@@ -9,21 +9,21 @@ public class RestauranteTest {
   public void create() {
 
     TipoCozinha tc = new TipoCozinha(1, "Italiano");
-    Restaurante r = new Restaurante(1, "Moliceiro", tc);
+    Restaurante res = new Restaurante(1, "Moliceiro", tc);
 
-    Assertions.assertThat(r.getId()).isNotNull();
-    Assertions.assertThat(r.getId()).isEqualTo(1);
-    Assertions.assertThat(r.getNome()).isNotNull();
-    Assertions.assertThat(r.getNome()).isEqualTo("Moliceiro");
-    Assertions.assertThat(r.getTipoCozinha()).isNotNull();
-    Assertions.assertThat(r.getTipoCozinha()).isEqualTo(tc);
+    Assertions.assertThat(res.getId()).isNotNull();
+    Assertions.assertThat(res.getId()).isEqualTo(1);
+    Assertions.assertThat(res.getNome()).isNotNull();
+    Assertions.assertThat(res.getNome()).isEqualTo("Moliceiro");
+    Assertions.assertThat(res.getTipoCozinha()).isNotNull();
+    Assertions.assertThat(res.getTipoCozinha()).isEqualTo(tc);
 
-    Assertions.assertThat(r.getPratos()).isNotNull();
-    Assertions.assertThat(r.getPratos()).isEmpty();
-    Assertions.assertThat(r.getReservas()).isNotNull();
-    Assertions.assertThat(r.getReservas()).isEmpty();
-    Assertions.assertThat(r.getTiposEntrega()).isNotNull();
-    Assertions.assertThat(r.getTiposEntrega()).isEmpty();
+    Assertions.assertThat(res.getPratos()).isNotNull();
+    Assertions.assertThat(res.getPratos()).isEmpty();
+    Assertions.assertThat(res.getReservas()).isNotNull();
+    Assertions.assertThat(res.getReservas()).isEmpty();
+    Assertions.assertThat(res.getTiposEntrega()).isNotNull();
+    Assertions.assertThat(res.getTiposEntrega()).isEmpty();
 
   }
 

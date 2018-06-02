@@ -27,7 +27,7 @@ public class RestauranteResource {
    * @return lista de todos os restaurantes.
    */
   @RequestMapping(value = "", method = RequestMethod.GET)
-  public ResponseEntity<?> getRestaurantes() {
+  public ResponseEntity<List<Restaurante>> getRestaurantes() {
     List<Restaurante> restaurantes = restauranteService.getAll();
 
     return ResponseEntity.ok(restaurantes);
@@ -39,7 +39,7 @@ public class RestauranteResource {
    * @return detalhes do restaurante.
    */
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public ResponseEntity<?> getRestauranteById(@PathVariable("id") Integer id) {
+  public ResponseEntity<Restaurante> getRestauranteById(@PathVariable("id") Integer id) {
     Restaurante restaurante = restauranteService.getById(id);
 
     return ResponseEntity.ok(restaurante);
