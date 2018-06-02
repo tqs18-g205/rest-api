@@ -40,7 +40,7 @@ public class TipoEntregaServiceTeste {
       .thenReturn(Optional.of(new TipoEntrega(1, "Take Away")));
     
     Mockito.when(repo.findById(2))
-    .thenReturn(Optional.ofNullable(null));
+      .thenReturn(Optional.ofNullable(null));
   }
   
   @Test
@@ -60,7 +60,7 @@ public class TipoEntregaServiceTeste {
     Assertions.assertThat(tipo.getId()).isEqualTo(1);
   }
   
-  @Test(expected=NoSuchElementException.class)
+  @Test(expected = NoSuchElementException.class)
   public void getByIdFails() {
     tipoEntregaService.getById(2);
   }

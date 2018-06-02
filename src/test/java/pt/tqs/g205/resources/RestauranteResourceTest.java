@@ -62,7 +62,7 @@ public class RestauranteResourceTest {
       .thenReturn(new Restaurante(1, "Moliceiro", null));
     
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurantes/1"))
-    .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-    .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1));
+      .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+      .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1));
   }
 }

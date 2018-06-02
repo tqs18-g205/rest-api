@@ -1,13 +1,13 @@
 package pt.tqs.g205.repositories;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.domain.Reserva;
 import pt.tqs.g205.domain.Restaurante;
+
+import java.util.List;
 
 /**
  * Operacoes de persistencia para a entidade Reserva.

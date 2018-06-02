@@ -1,14 +1,14 @@
 package pt.tqs.g205.services;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pt.tqs.g205.domain.TipoEntrega;
 import pt.tqs.g205.repositories.TipoEntregaRepository;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  * Logica de negocio associada aos tipos de entrega.

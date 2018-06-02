@@ -40,7 +40,7 @@ public class TipoEntregaServiceIntegration {
     Assertions.assertThat(tipo.getId()).isEqualTo(1);
   }
   
-  @Test(expected=NoSuchElementException.class)
+  @Test(expected = NoSuchElementException.class)
   public void getByIdFails() {
     tipoEntregaService.getById(0);
   }

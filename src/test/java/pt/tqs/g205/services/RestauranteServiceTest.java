@@ -33,12 +33,15 @@ public class RestauranteServiceTest {
   private PratoRepository pratoRepository;
   
   @MockBean
-  private ReservaRepository ReservaRepository;
+  private ReservaRepository reservaRepository;
   
+  /**
+   * Setup dos testes.
+   */
   @Before
   public void setup() {
     Mockito.when(restauranteRepo.findAll())
-      .thenReturn(Collections.singletonList(new Restaurante(1, "Moliceiro",
+        .thenReturn(Collections.singletonList(new Restaurante(1, "Moliceiro",
           new TipoCozinha(1, "Portuguesa"))));
     
     Mockito.when(restauranteRepo.findById(1))

@@ -18,18 +18,18 @@ public class ReservaTest {
     LocalDate ld = LocalDate.of(2018, 6, 22);
     LocalTime lt = LocalTime.of(12, 30);
 
-    Reserva r = new Reserva(1, cliente, rest, ld, lt);
+    Reserva reserva = new Reserva(1, cliente, rest, ld, lt);
 
-    Assertions.assertThat(r.getId()).isNotNull();
-    Assertions.assertThat(r.getId()).isEqualTo(1);
-    Assertions.assertThat(r.getCliente()).isNotNull();
-    Assertions.assertThat(r.getCliente()).isEqualTo(cliente);
-    Assertions.assertThat(r.getRestaurante()).isNotNull();
-    Assertions.assertThat(r.getRestaurante()).isEqualTo(rest);
-    Assertions.assertThat(r.getData()).isNotNull();
-    Assertions.assertThat(r.getData()).isEqualTo(ld);
-    Assertions.assertThat(r.getTime()).isNotNull();
-    Assertions.assertThat(r.getTime()).isEqualTo(lt);
+    Assertions.assertThat(reserva.getId()).isNotNull();
+    Assertions.assertThat(reserva.getId()).isEqualTo(1);
+    Assertions.assertThat(reserva.getCliente()).isNotNull();
+    Assertions.assertThat(reserva.getCliente()).isEqualTo(cliente);
+    Assertions.assertThat(reserva.getRestaurante()).isNotNull();
+    Assertions.assertThat(reserva.getRestaurante()).isEqualTo(rest);
+    Assertions.assertThat(reserva.getData()).isNotNull();
+    Assertions.assertThat(reserva.getData()).isEqualTo(ld);
+    Assertions.assertThat(reserva.getTime()).isNotNull();
+    Assertions.assertThat(reserva.getTime()).isEqualTo(lt);
 
   }
 

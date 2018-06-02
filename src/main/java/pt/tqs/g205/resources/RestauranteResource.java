@@ -13,7 +13,7 @@ import pt.tqs.g205.services.RestauranteService;
 import java.util.List;
 
 /**
- * Controlador REST para expor Restaurantes
+ * Controlador REST para expor Restaurantes.
  */
 @RestController
 @RequestMapping(value = "/api/restaurantes")

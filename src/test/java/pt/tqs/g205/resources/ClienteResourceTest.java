@@ -1,5 +1,7 @@
 package pt.tqs.g205.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +33,6 @@ import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.security.JwtUtil;
 import pt.tqs.g205.services.ClienteService;
 import pt.tqs.g205.services.ReservaService;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -122,7 +122,8 @@ public class ClienteResourceTest {
     
     String token = jwtUtil.generateToken(cli.getEmail());
     this.mockMvc.perform(
-        MockMvcRequestBuilders.post("/api/clientes/1/reservas").header("Authorization", "Bearer " + token)
+        MockMvcRequestBuilders.post("/api/clientes/1/reservas")
+        .header("Authorization", "Bearer " + token)
         .contentType(MediaType.APPLICATION_JSON_UTF8).content(reservaJson))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }

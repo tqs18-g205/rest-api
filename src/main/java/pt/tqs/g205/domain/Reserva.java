@@ -1,5 +1,7 @@
 package pt.tqs.g205.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * Reservas.

@@ -421,7 +421,8 @@ public class RestapiApplication implements CommandLineRunner {
     
     res.setPratos(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15));
     
-    final Reserva reserva = new Reserva(null, cli, res, LocalDate.of(2018, 9, 1), LocalTime.of(20, 0));
+    final Reserva reserva = new Reserva(null, cli, res, LocalDate.of(2018, 9, 1), 
+        LocalTime.of(20, 0));
     
     
     restauranteRepo.saveAll(Arrays.asList(res));

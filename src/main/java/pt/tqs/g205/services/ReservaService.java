@@ -46,12 +46,12 @@ public class ReservaService {
     Cliente cli = clienteService.getById(cliente);
     Restaurante res = restauranteService.getById(restaurante);
 
-    String[] d = data.split("-");
+    String[] dt = data.split("-");
     LocalDate date =
-        LocalDate.of(Integer.parseInt(d[2]), Integer.parseInt(d[1]), Integer.parseInt(d[0]));
+        LocalDate.of(Integer.parseInt(dt[2]), Integer.parseInt(dt[1]), Integer.parseInt(dt[0]));
 
-    String[] h = hora.split(":");
-    LocalTime hour = LocalTime.of(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
+    String[] hr = hora.split(":");
+    LocalTime hour = LocalTime.of(Integer.parseInt(hr[0]), Integer.parseInt(hr[1]));
 
     Reserva reserva = new Reserva(null, cli, res, date, hour);
 
