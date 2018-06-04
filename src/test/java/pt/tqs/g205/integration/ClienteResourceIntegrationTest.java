@@ -19,12 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.repositories.ClienteRepository;
+import pt.tqs.g205.resources.models.EncomendaModel;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.security.JwtUtil;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootTest
 @AutoConfigureDataJpa
@@ -48,6 +51,8 @@ public class ClienteResourceIntegrationTest {
   private String token;
   private ReservaModel reservaModel;
   private String reservaJson;
+  private EncomendaModel encomendaModel;
+  private String encomendaJson;
 
   /**
    * Setup dos testes.
@@ -62,10 +67,17 @@ public class ClienteResourceIntegrationTest {
     cli = clienteRepo.findById(1).get();
     
     reservaModel = new ReservaModel(1,1, "31-12-2018", "18:30");
+    encomendaModel = new EncomendaModel(1,1);
+    Map<Integer, Integer> pratos = new HashMap<>();
+    pratos.put(1, 1);
+    pratos.put(2, 1);
+    pratos.put(7, 1);
+    encomendaModel.setPratos(pratos);
 
     ObjectMapper mapper = new ObjectMapper();
     json = mapper.writeValueAsString(cliente);
     reservaJson = mapper.writeValueAsString(reservaModel);
+    encomendaJson = mapper.writeValueAsString(encomendaModel);
 
     token = jwtUtil.generateToken(cli.getEmail());
 
@@ -114,4 +126,14 @@ public class ClienteResourceIntegrationTest {
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
+  @Test
+  public void fazerEncomenda() throws Exception {
+    String token = jwtUtil.generateToken(cli.getEmail());
+    this.mockMvc.perform(
+        MockMvcRequestBuilders.post("/api/clientes/1/encomendas")
+        .header("Authorization", "Bearer " + token)
+        .contentType(MediaType.APPLICATION_JSON_UTF8).content(encomendaJson))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+  
 }
