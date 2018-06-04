@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.repositories.ClienteRepository;
+import pt.tqs.g205.repositories.EncomendaRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
 import pt.tqs.g205.repositories.ReservaRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
@@ -30,6 +31,12 @@ import java.util.Optional;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ClienteServiceTest {
+  @MockBean
+  private EncomendaRestauranteService encomendaRestauranteService;
+  
+  @MockBean
+  private EncomendaRepository encomendaRepo;
+  
   @Autowired
   private ClienteService clienteService;
 

@@ -39,6 +39,9 @@ public class RestauranteServiceTest {
   @MockBean
   private ReservaRepository reservaRepository;
   
+  @MockBean
+  private EncomendaRestauranteService encomendaRestauranteService;
+  
   /**
    * Setup dos testes.
    */

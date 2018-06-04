@@ -20,7 +20,9 @@ import java.util.NoSuchElementException;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PratoServiceTest {
-
+  @MockBean
+  private EncomendaRestauranteService encomendaRestauranteService;
+  
   @MockBean
   private PratoRepository pratoRepo;
 

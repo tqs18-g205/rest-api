@@ -8,24 +8,33 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pt.tqs.g205.domain.CategoriaPrato;
 import pt.tqs.g205.domain.Cliente;
+import pt.tqs.g205.domain.Encomenda;
+import pt.tqs.g205.domain.EstadoEncomenda;
+import pt.tqs.g205.domain.EstadoEncomendaHora;
 import pt.tqs.g205.domain.Ingrediente;
 import pt.tqs.g205.domain.IngredientesPorPrato;
 import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.domain.Prato;
+import pt.tqs.g205.domain.PratosPorEncomenda;
 import pt.tqs.g205.domain.Reserva;
 import pt.tqs.g205.domain.Restaurante;
 import pt.tqs.g205.domain.TipoCozinha;
 import pt.tqs.g205.domain.TipoEntrega;
 import pt.tqs.g205.repositories.CategoriaPratoRepository;
 import pt.tqs.g205.repositories.ClienteRepository;
+import pt.tqs.g205.repositories.EncomendaRepository;
+import pt.tqs.g205.repositories.EstadoEncomendaHoraRepository;
+import pt.tqs.g205.repositories.EstadoEncomendaRepository;
 import pt.tqs.g205.repositories.IngredienteRepository;
 import pt.tqs.g205.repositories.IngredientesPorPratoRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
 import pt.tqs.g205.repositories.PratoRepository;
+import pt.tqs.g205.repositories.PratosPorEncomendaRepository;
 import pt.tqs.g205.repositories.ReservaRepository;
 import pt.tqs.g205.repositories.RestauranteRepository;
 import pt.tqs.g205.repositories.TipoCozinhaRepository;
 import pt.tqs.g205.repositories.TipoEntregaRepository;
+import pt.tqs.g205.services.EncomendaRestauranteService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -66,6 +75,21 @@ public class RestapiApplication implements CommandLineRunner {
   
   @Autowired
   private ReservaRepository reservaRepo;
+  
+  @Autowired
+  private EstadoEncomendaRepository estadoEncomendaRepo;
+  
+  @Autowired
+  private EncomendaRepository encomendaRepo;
+  
+  @Autowired
+  private EstadoEncomendaHoraRepository eehRepo;
+  
+  @Autowired
+  private PratosPorEncomendaRepository ppeRepo;
+  
+  @Autowired
+  private EncomendaRestauranteService encomendaRestauranteService;
 
   public static void main(String[] args) {
     SpringApplication.run(RestapiApplication.class, args);
@@ -461,5 +485,29 @@ public class RestapiApplication implements CommandLineRunner {
         ipp153, ipp154, ipp155, ipp156));
     
     reservaRepo.saveAll(Arrays.asList(reserva));
+    
+    
+    EstadoEncomenda eec1 = new EstadoEncomenda(null, "Recebido");
+    EstadoEncomenda eec2 = new EstadoEncomenda(null, "Em preparação");
+    EstadoEncomenda eec3 = new EstadoEncomenda(null, "Pronta para entrega");
+    EstadoEncomenda eec4 = new EstadoEncomenda(null, "Entregue");
+    
+    estadoEncomendaRepo.saveAll(Arrays.asList(eec1, eec2, eec3, eec4));
+    
+    Encomenda enc = new Encomenda(null, entrega1, cli);
+    
+    encomendaRepo.saveAll(Arrays.asList(enc));
+    
+    EstadoEncomendaHora eeh = new EstadoEncomendaHora(enc, eec1,
+        LocalDate.now(), LocalTime.now());
+    
+    eehRepo.saveAll(Arrays.asList(eeh));
+    PratosPorEncomenda ppe1 = new PratosPorEncomenda(enc, p1, 2);
+    PratosPorEncomenda ppe2 = new PratosPorEncomenda(enc, p7, 1);
+    ppeRepo.saveAll(Arrays.asList(ppe1, ppe2));
+    enc.setEstados(Arrays.asList(eeh));
+    enc.setPratos(Arrays.asList(ppe1, ppe2));
+    encomendaRepo.saveAll(Arrays.asList(enc));
+    encomendaRestauranteService.criarParcelas(enc);
   }
 }

@@ -42,6 +42,10 @@ public class Cliente implements Serializable {
   @JsonBackReference
   @OneToMany(mappedBy = "cliente")
   private List<Reserva> reservas = new ArrayList<>();
+  
+  @JsonBackReference
+  @OneToMany(mappedBy = "cliente")
+  private List<Encomenda> encomendas = new ArrayList<>();
 
   public Cliente() {
     super();
@@ -111,8 +115,16 @@ public class Cliente implements Serializable {
   public void setMoradas(List<Morada> moradas) {
     this.moradas = moradas;
   }
+  
+  
 
+  public List<Encomenda> getEncomendas() {
+    return encomendas;
+  }
 
+  public void setEncomendas(List<Encomenda> encomendas) {
+    this.encomendas = encomendas;
+  }
 
   public String getEmail() {
     return email;
