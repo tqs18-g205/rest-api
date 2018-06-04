@@ -8,6 +8,7 @@ import pt.tqs.g205.domain.EncomendaRestaurante;
 import pt.tqs.g205.domain.EstadoEncomenda;
 import pt.tqs.g205.domain.Prato;
 import pt.tqs.g205.domain.PratosPorEncomenda;
+import pt.tqs.g205.dto.EncomendaRestauranteDto;
 import pt.tqs.g205.repositories.EncomendaRepository;
 import pt.tqs.g205.repositories.EncomendaRestauranteRepository;
 import pt.tqs.g205.repositories.EstadoEncomendaRepository;
@@ -76,5 +77,70 @@ public class EncomendaRestauranteService {
     encomendaRepo.saveAll(Arrays.asList(enc));
     return parcelas;
   }
+  
+  /**
+   * Obter todos os pratos de uma parcela.
+   * @param parcela parcela.
+   * @return lista de pratos.
+   */
+  private List<Prato> getPratosParcela(EncomendaRestaurante parcela) {
+    List<Prato> pratos = new ArrayList<>();
+    Encomenda enc = parcela.getEncomenda();
+    
+    enc.getPratos().forEach(ppe -> {
+      Prato prato = pratoRepo.findById(ppe.getId().getPratoId()).get();
+      if (prato.getRestaurante().getId().equals(parcela.getRestaurante())) {
+        prato.setEncomendas(null);
+        prato.setIngredientes(null);
+        prato.setCategorias(null);
+        
+        pratos.add(prato);
+      }
+    });
+    return pratos;
+  }
+  
+  /**
+   * Obter uma encomenda do restaurante.
+   * @param id id da parcela.
+   * @return detalhes da parcela.
+   */
+  public EncomendaRestaurante getParcela(Integer id) {
+    Optional<EncomendaRestaurante> optParcela = encomendaRestauranteRepo.findById(id);
+    
+    if (!optParcela.isPresent()) {
+      throw new NoSuchElementException();
+    }
+    
+    EncomendaRestaurante parcela = optParcela.get();
+    
+    parcela.setPratos(getPratosParcela(parcela));
+    
+    parcela.getEncomenda().setPratos(null);
+    parcela.getEncomenda().setEstados(null);
+    parcela.getEncomenda().setId(null);
+    
+    return parcela;
+  }
+  
+  /**
+   * Obter todas as encomendas de um restaurante.
+   * @param restaurante id do restaurante.
+   * @return lista de encomendas do restaurante.
+   */
+  public List<EncomendaRestauranteDto> getEncomendas(Integer restaurante) {
+    List<EncomendaRestaurante> parcelas = encomendaRestauranteRepo.findByRestaurante(restaurante);
+    List<EncomendaRestauranteDto> res = new ArrayList<>();
+    
+    
+    parcelas.forEach(par -> {
+      EncomendaRestauranteDto dto = new EncomendaRestauranteDto(par.getId(), par.getEncomenda().getTipoEntrega(), 
+          par.getEstado());
+      res.add(dto);
+    });
+    
+    return res;
+  }
+
 
 }
