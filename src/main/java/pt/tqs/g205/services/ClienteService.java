@@ -77,7 +77,7 @@ public class ClienteService {
    */
   public Cliente getById(Integer id) {
     ClienteSs client = userService.authenticated();
-
+    
     if (client == null || !id.equals(client.getId())) {
       throw new AuthorizationException("Access denied");
     }

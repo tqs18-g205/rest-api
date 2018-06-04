@@ -118,6 +118,7 @@ public class Encomenda implements Serializable {
   public void setEstados(List<EstadoEncomendaHora> estados) {
     this.estados = estados;
   }
+  
 
   /**
    * Atualiza estado da encomenda.
