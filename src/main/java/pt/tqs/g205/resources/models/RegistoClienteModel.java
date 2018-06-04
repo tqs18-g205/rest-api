@@ -1,8 +1,6 @@
 package pt.tqs.g205.resources.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Modelo do pedido para registo de cliente.

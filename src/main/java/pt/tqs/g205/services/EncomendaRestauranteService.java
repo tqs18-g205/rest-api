@@ -58,6 +58,9 @@ public class EncomendaRestauranteService {
     
     Set<Integer> restaurantes = new HashSet<>();
     
+    if (enc.getPratos().isEmpty()) 
+      throw new RuntimeException();
+    
     for (PratosPorEncomenda ppe : enc.getPratos()) {
       Optional<Prato> optPrato = pratoRepo.findById(ppe.getId().getPratoId());
       
