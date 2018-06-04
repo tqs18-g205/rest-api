@@ -45,14 +45,14 @@ public class RestauranteResourceIntegrationTest {
   @Test
   public void getEncomendas() throws Exception {
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurantes/1/encomendas"))
-    .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-    .andExpect(MockMvcResultMatchers.jsonPath("@.[0].id").value(1));
+      .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+      .andExpect(MockMvcResultMatchers.jsonPath("@.[0].id").value(1));
   }
   
   @Test
   public void getEncomenda() throws Exception {
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurantes/1/encomendas/1"))
-    .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-    .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1));
+      .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+      .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1));
   }
 }

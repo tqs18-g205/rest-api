@@ -74,7 +74,8 @@ public class RestauranteResource {
    * @return lista de encomendas.
    */
   @RequestMapping(value = "/{id}/encomendas", method = RequestMethod.GET)
-  public ResponseEntity<List<EncomendaRestauranteDto>> getEncomendas(@PathVariable("id") Integer id) {
+  public ResponseEntity<List<EncomendaRestauranteDto>> getEncomendas(
+      @PathVariable("id") Integer id) {
     List<EncomendaRestauranteDto> parcelas = encomendaRestauranteService.getEncomendas(id);
 
     return ResponseEntity.ok(parcelas);

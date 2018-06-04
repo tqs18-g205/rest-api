@@ -134,8 +134,8 @@ public class EncomendaRestauranteService {
     
     
     parcelas.forEach(par -> {
-      EncomendaRestauranteDto dto = new EncomendaRestauranteDto(par.getId(), par.getEncomenda().getTipoEntrega(), 
-          par.getEstado());
+      EncomendaRestauranteDto dto = new EncomendaRestauranteDto(
+          par.getId(), par.getEncomenda().getTipoEntrega(), par.getEstado());
       res.add(dto);
     });
     
