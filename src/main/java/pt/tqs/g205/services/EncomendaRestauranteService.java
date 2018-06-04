@@ -50,10 +50,6 @@ public class EncomendaRestauranteService {
     
     Optional<EstadoEncomenda> optEstado = estadoEncomendaRepo.findById(1);
     
-    if (!optEstado.isPresent()) {
-      throw new NoSuchElementException();
-    }
-    
     EstadoEncomenda estado = optEstado.get();
     
     Set<Integer> restaurantes = new HashSet<>();
