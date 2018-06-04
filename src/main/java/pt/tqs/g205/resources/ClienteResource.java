@@ -89,7 +89,31 @@ public class ClienteResource {
     return ResponseEntity.ok(reservas);
   }
   
+  /**
+   * Endpoint para obter as encomendas de um cliente.
+   * @param id id do cliente.
+   * @return lista de encomendas do cliente.
+   */
+  @RequestMapping(value = "/{id}/encomendas", method = RequestMethod.GET)
+  public ResponseEntity<List<Encomenda>> getEncomendasCliente(@PathVariable("id") Integer id) {
+    List<Encomenda> encomendas = encomendaService.getByClienteId(id);
+
+    return ResponseEntity.ok(encomendas);
+  }
   
+  /**
+   * Endpoint para obter detalhes de uma encomenda.
+   * @param id id do cliente.
+   * @param enc id da encomenda.
+   * @return encomenda.
+   */
+  @RequestMapping(value = "/{id}/encomendas/{enc}", method = RequestMethod.GET)
+  public ResponseEntity<Encomenda> getEncomenda(@PathVariable("id") Integer id,
+      @PathVariable("enc") Integer enc) {
+    Encomenda encomenda = encomendaService.getEncomendaById(enc);
+
+    return ResponseEntity.ok(encomenda);
+  }
 
   /**
    * Endpoint para fazer encomenda.
