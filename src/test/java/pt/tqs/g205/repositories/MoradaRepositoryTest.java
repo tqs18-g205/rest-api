@@ -28,7 +28,7 @@ public class MoradaRepositoryTest {
     Morada morada = new Morada(null, "Rua xpto", "Gloria", "3810-610", "Aveiro", cli, null);
 
     Cliente cliente = clienteRepo.save(cli);
-    cliente.setMoradas(Arrays.asList(morada));
+    cliente.setMorada(morada);
     moradaRepo.saveAll(Arrays.asList(morada));
     clienteRepo.saveAll(Arrays.asList(cliente));
 
@@ -46,7 +46,7 @@ public class MoradaRepositoryTest {
     Morada morada = new Morada(null, "Rua xpto", "Aveiro", "3810-610", "Aveiro", cli, null);
 
     Cliente cliente = clienteRepo.save(cli);
-    cliente.setMoradas(Arrays.asList(morada));
+    cliente.setMorada(morada);
     moradaRepo.saveAll(Arrays.asList(morada));
     clienteRepo.saveAll(Arrays.asList(cliente));
 

@@ -15,7 +15,7 @@ public class RegistoClienteModel implements Serializable {
   private String passwd;
   private String nif;
   private String email;
-  private List<MoradaModel> moradas = new ArrayList<>();
+  private MoradaModel morada;
 
   public RegistoClienteModel() {
     super();
@@ -68,12 +68,14 @@ public class RegistoClienteModel implements Serializable {
     this.email = email;
   }
 
-  public List<MoradaModel> getMoradas() {
-    return moradas;
+  public MoradaModel getMorada() {
+    return morada;
   }
 
-  public void setMoradas(List<MoradaModel> moradas) {
-    this.moradas = moradas;
+  public void setMorada(MoradaModel morada) {
+    this.morada = morada;
   }
+
+  
 
 }

@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Restaurantes.
@@ -50,8 +51,8 @@ public class Restaurante implements Serializable {
   private List<Reserva> reservas = new ArrayList<>();
   
   @JsonManagedReference
-  @OneToMany(mappedBy = "restaurante")
-  private List<Morada> moradas = new ArrayList<>();
+  @OneToOne(mappedBy = "restaurante")
+  private Morada morada;
 
   public Restaurante() {}
 
@@ -115,16 +116,16 @@ public class Restaurante implements Serializable {
   public void setTipoCozinha(TipoCozinha tipoCozinha) {
     this.tipoCozinha = tipoCozinha;
   }
-
-  public List<Morada> getMoradas() {
-    return moradas;
-  }
-
-  public void setMoradas(List<Morada> moradas) {
-    this.moradas = moradas;
-  }
   
   
+
+  public Morada getMorada() {
+    return morada;
+  }
+
+  public void setMorada(Morada morada) {
+    this.morada = morada;
+  }
 
   public String getImagem() {
     return imagem;

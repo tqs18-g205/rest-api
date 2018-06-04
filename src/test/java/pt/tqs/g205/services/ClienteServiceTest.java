@@ -17,13 +17,14 @@ import pt.tqs.g205.domain.Morada;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.repositories.EncomendaRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
+import pt.tqs.g205.repositories.PratoRepository;
 import pt.tqs.g205.repositories.ReservaRepository;
+import pt.tqs.g205.repositories.RestauranteRepository;
 import pt.tqs.g205.resources.models.MoradaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.security.ClienteSs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,12 @@ public class ClienteServiceTest {
   
   @Autowired
   private ClienteService clienteService;
+  
+  @MockBean
+  private RestauranteRepository restauranteRepo;
+  
+  @MockBean
+  private PratoRepository pratoRepo;
 
   @MockBean
   private ClienteRepository clienteRepo;
@@ -71,9 +78,9 @@ public class ClienteServiceTest {
     morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", cli, null);
     clienteModel = new RegistoClienteModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
     model = new MoradaModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
-    clienteModel.setMoradas(Arrays.asList(model));
+    clienteModel.setMorada(model);
     cli = new Cliente(1, "Chico Matos", "1234", "999999999", "chico@matos.pt");
-    cli.setMoradas(Arrays.asList(morada));
+    cli.setMorada(morada);
     clientes = new ArrayList<>();
     clientes.add(cli);
 
@@ -95,8 +102,7 @@ public class ClienteServiceTest {
     Cliente cliente = clienteService.registerCliente(clienteModel);
 
     Assertions.assertThat(cliente.getId()).isEqualTo(1);
-    Assertions.assertThat(cliente.getMoradas()).isNotNull();
-    Assertions.assertThat(cliente.getMoradas()).isNotEmpty();
+    Assertions.assertThat(cliente.getMorada()).isNotNull();
   }
 
   @Test
@@ -104,8 +110,7 @@ public class ClienteServiceTest {
     Cliente cliente = clienteService.getById(1);
 
     Assertions.assertThat(cliente.getId()).isEqualTo(1);
-    Assertions.assertThat(cliente.getMoradas()).isNotNull();
-    Assertions.assertThat(cliente.getMoradas()).isNotEmpty();
+    Assertions.assertThat(cliente.getMorada()).isNotNull();
   }
 
   @Test
@@ -116,6 +121,6 @@ public class ClienteServiceTest {
     Assertions.assertThat(listagem).isNotEmpty();
     Assertions.assertThat(listagem.get(0)).isNotNull();
     Assertions.assertThat(listagem.get(0).getId()).isEqualTo(1);
-    Assertions.assertThat(listagem.get(0).getMoradas()).isNotNull();
+    Assertions.assertThat(listagem.get(0).getMorada()).isNotNull();
   }
 }

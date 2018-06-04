@@ -13,6 +13,7 @@ import pt.tqs.g205.repositories.EncomendaRepository;
 import pt.tqs.g205.repositories.EncomendaRestauranteRepository;
 import pt.tqs.g205.repositories.EstadoEncomendaRepository;
 import pt.tqs.g205.repositories.PratoRepository;
+import pt.tqs.g205.resources.models.AtualizarParcelaModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,9 @@ import java.util.Set;
 public class EncomendaRestauranteService {
   @Autowired
   private EstadoEncomendaRepository estadoEncomendaRepo;
+  
+  @Autowired
+  private EstadoEncomendaService estadoEncomendaService;
   
   @Autowired
   private PratoRepository pratoRepo;
@@ -141,6 +145,39 @@ public class EncomendaRestauranteService {
     
     return res;
   }
-
+  
+  /**
+   * Atualizar estado da encomenda.
+   * @param model dados para atualizar.
+   * @return parcela atualizada.
+   */
+  public EncomendaRestaurante updateParcela(AtualizarParcelaModel model) {
+    Optional<EncomendaRestaurante> optParcela = 
+        encomendaRestauranteRepo.findById(model.getEncomenda());
+    
+    if (!optParcela.isPresent()) {
+      throw new NoSuchElementException();
+    }
+    
+    EncomendaRestaurante parcela = optParcela.get();
+    
+    EstadoEncomenda estado = estadoEncomendaService.getById(model.getEstado());
+    
+    parcela.setEstado(estado);
+    EncomendaRestaurante updated = encomendaRestauranteRepo.save(parcela);
+    
+    Encomenda enc = updated.getEncomenda();
+    enc.updateEstado();
+    encomendaRepo.saveAll(Arrays.asList(enc));
+    
+    
+    updated.setPratos(getPratosParcela(parcela));
+    
+    updated.getEncomenda().setPratos(null);
+    updated.getEncomenda().setEstados(null);
+    updated.getEncomenda().setId(null);
+    
+    return updated;
+  }
 
 }

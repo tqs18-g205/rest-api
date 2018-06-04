@@ -30,6 +30,7 @@ public class Encomenda implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+  private Double total;
 
   @JsonManagedReference
   @OneToMany(mappedBy = "encomenda")
@@ -119,6 +120,13 @@ public class Encomenda implements Serializable {
     this.estados = estados;
   }
   
+  public Double getTotal() {
+    return total;
+  }
+
+  public void setTotal(Double total) {
+    this.total = total;
+  }
 
   /**
    * Atualiza estado da encomenda.
@@ -133,6 +141,18 @@ public class Encomenda implements Serializable {
           estadosParcelas.iterator().next(), LocalDate.now(), LocalTime.now());
       estados.add(novoEstado);
     }
+  }
+  
+  /**
+   * Calcula preco total da encomenda.
+   */
+  public void calcularPreco() {
+    Double sum = 0.0;
+    for (PratosPorEncomenda ppe : pratos) {
+      Prato prato = ppe.getPrato();
+      sum += prato.getPreco() * ppe.getQuantity();
+    }
+    this.total = sum;
   }
 
   @Override

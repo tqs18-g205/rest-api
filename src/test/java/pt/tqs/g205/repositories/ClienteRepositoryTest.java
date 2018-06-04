@@ -28,15 +28,14 @@ public class ClienteRepositoryTest {
     Morada morada = new Morada(null, "Rua xpto", "Aveiro", "3810-610", "Aveiro", cli, null);
 
     Cliente cliente = clienteRepo.save(cli);
-    cliente.setMoradas(Arrays.asList(morada));
+    cliente.setMorada(morada);
     moradaRepo.saveAll(Arrays.asList(morada));
     clienteRepo.saveAll(Arrays.asList(cliente));
 
     Assertions.assertThat(cliente.getId()).isNotNull();
     Assertions.assertThat(cliente.getId()).isGreaterThan(0);
-    Assertions.assertThat(cliente.getMoradas()).isNotNull();
-    Assertions.assertThat(cliente.getMoradas()).isNotEmpty();
-    Assertions.assertThat(cliente.getMoradas().get(0).getDistrito()).isEqualTo("Aveiro");
+    Assertions.assertThat(cliente.getMorada()).isNotNull();
+    Assertions.assertThat(cliente.getMorada().getDistrito()).isEqualTo("Aveiro");
   }
 
   @Test
@@ -47,7 +46,6 @@ public class ClienteRepositoryTest {
     cliente = clienteRepo.findById(cliente.getId()).get();
     Assertions.assertThat(cliente.getId()).isNotNull();
     Assertions.assertThat(cliente.getId()).isGreaterThan(0);
-    Assertions.assertThat(cliente.getMoradas()).isNotNull();
   }
 
   @Test
@@ -58,6 +56,5 @@ public class ClienteRepositoryTest {
     cliente = clienteRepo.findByEmail(cliente.getEmail());
     Assertions.assertThat(cliente.getId()).isNotNull();
     Assertions.assertThat(cliente.getId()).isGreaterThan(0);
-    Assertions.assertThat(cliente.getMoradas()).isNotNull();
   }
 }

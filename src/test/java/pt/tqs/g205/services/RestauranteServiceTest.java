@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import pt.tqs.g205.domain.Restaurante;
 import pt.tqs.g205.domain.TipoCozinha;
+import pt.tqs.g205.repositories.ClienteRepository;
+import pt.tqs.g205.repositories.EncomendaRepository;
 import pt.tqs.g205.repositories.MoradaRepository;
 import pt.tqs.g205.repositories.PratoRepository;
 import pt.tqs.g205.repositories.ReservaRepository;
@@ -38,6 +40,12 @@ public class RestauranteServiceTest {
   
   @MockBean
   private ReservaRepository reservaRepository;
+  
+  @MockBean
+  private ClienteRepository clienteRepo;
+  
+  @MockBean
+  private EncomendaRepository encomendaRepo;
   
   @MockBean
   private EncomendaRestauranteService encomendaRestauranteService;
