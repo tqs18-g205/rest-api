@@ -1,5 +1,8 @@
 package pt.tqs.g205.integration;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +21,6 @@ import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.repositories.ClienteRepository;
 import pt.tqs.g205.resources.models.PagamentoModel;
 import pt.tqs.g205.security.JwtUtil;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureDataJpa

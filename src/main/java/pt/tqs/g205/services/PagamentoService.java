@@ -12,6 +12,11 @@ public class PagamentoService {
   @Autowired
   private ClienteService clienteService;
   
+  /**
+   * Processa o pagamento da encomenda.
+   * @param pagamento detalhes do pagamento.
+   * @return fatura simplificada.
+   */
   public FaturaDto processarPagamento(PagamentoModel pagamento) {
     Cliente cli = clienteService.getById(pagamento.getCliente());
     return new FaturaDto(cli.getNome(), cli.getNif(), pagamento.getMontante(), 
