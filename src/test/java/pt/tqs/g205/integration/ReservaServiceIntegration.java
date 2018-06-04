@@ -18,6 +18,8 @@ import pt.tqs.g205.security.ClienteSs;
 import pt.tqs.g205.services.ReservaService;
 import pt.tqs.g205.services.UserService;
 
+import java.util.List;
+
 @SpringBootTest
 @Transactional
 @RunWith(SpringRunner.class)
@@ -50,5 +52,15 @@ public class ReservaServiceIntegration {
     Assertions.assertThat(reserva).isNotNull();
     Assertions.assertThat(reserva.getCliente()).isEqualTo(cli);
     Assertions.assertThat(reserva.getRestaurante()).isNotNull();
+  }
+  
+  @Test
+  public void getByClientId() {
+    List<Reserva> reservas = reservaService.getByClienteId(1);
+    Assertions.assertThat(reservas).isNotNull();
+    Assertions.assertThat(reservas).isNotEmpty();
+    Reserva res = reservas.iterator().next();
+    Assertions.assertThat(res).isNotNull();
+    Assertions.assertThat(res.getCliente().getId()).isEqualTo(1);
   }
 }

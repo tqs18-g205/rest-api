@@ -12,6 +12,8 @@ import pt.tqs.g205.repositories.RestauranteRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Logica de negocio associada as Reservas.
@@ -64,6 +66,23 @@ public class ReservaService {
 
     return resultado;
   }
+  
+  /**
+   * Lista todas as reservas de um cliente.
+   * @param id id do cliente.
+   * @return lista de reservas do cliente.
+   */
+  public List<Reserva> getByClienteId(Integer id) {
+    Cliente cli = clienteService.getById(id);
 
+    List<Reserva> reservas = reservaRepo.getByCliente(cli);
 
+    reservas.forEach(e -> {
+      e.getRestaurante().setPratos(Collections.emptyList());
+      e.getRestaurante().setReservas(Collections.emptyList());
+      e.getRestaurante().setTiposEntrega(Collections.emptyList());
+    });
+
+    return reservas;
+  }
 }

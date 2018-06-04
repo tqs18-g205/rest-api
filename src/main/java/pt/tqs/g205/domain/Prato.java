@@ -49,6 +49,10 @@ public class Prato implements Serializable {
   @ManyToOne
   @JoinColumn(name = "restaurante_id")
   private Restaurante restaurante;
+  
+  @JsonBackReference
+  @OneToMany(mappedBy = "prato")
+  private List<PratosPorEncomenda> encomendas = new ArrayList<>();
 
   public Prato() {}
 
@@ -130,6 +134,14 @@ public class Prato implements Serializable {
   }
   
   
+
+  public List<PratosPorEncomenda> getEncomendas() {
+    return encomendas;
+  }
+
+  public void setEncomendas(List<PratosPorEncomenda> encomendas) {
+    this.encomendas = encomendas;
+  }
 
   public Restaurante getRestaurante() {
     return restaurante;

@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pt.tqs.g205.domain.Cliente;
+import pt.tqs.g205.domain.Encomenda;
 import pt.tqs.g205.domain.Reserva;
+import pt.tqs.g205.resources.models.EncomendaModel;
 import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.services.ClienteService;
+import pt.tqs.g205.services.EncomendaService;
 import pt.tqs.g205.services.ReservaService;
+
+import java.util.List;
 
 /**
  * Controlador REST para expôr serviços aos Clientes.
@@ -27,6 +32,10 @@ public class ClienteResource {
   
   @Autowired
   private ReservaService reservaService;
+  
+  @Autowired
+  private EncomendaService encomendaService;
+
 
   /**
    * Endpoint para registar clientes.
@@ -67,5 +76,32 @@ public class ClienteResource {
     return ResponseEntity.ok(res);
 
   }
+  
+  /**
+   * Endpoint para obter as reservas de um cliente.
+   * @param id id do cliente.
+   * @return lista de reservas do cliente.
+   */
+  @RequestMapping(value = "/{id}/reservas", method = RequestMethod.GET)
+  public ResponseEntity<List<Reserva>> getReservasCliente(@PathVariable("id") Integer id) {
+    List<Reserva> reservas = reservaService.getByClienteId(id);
 
+    return ResponseEntity.ok(reservas);
+  }
+  
+  
+
+  /**
+   * Endpoint para fazer encomenda.
+   * @param id id do cliente.
+   * @param encomenda detalhes da encomenda.
+   * @return encomenda.
+   */
+  @RequestMapping(value = "/{id}/encomendas", method = RequestMethod.POST)
+  public ResponseEntity<Encomenda> criarEncomenda(@PathVariable("id") Integer id,
+      @RequestBody EncomendaModel encomenda) {
+    Encomenda enc = encomendaService.fazerEncomenda(id, encomenda);
+
+    return ResponseEntity.ok(enc);
+  }
 }

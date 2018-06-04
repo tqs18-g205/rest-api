@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
- * Tipos de entrega.
+ * Estado da encomenda.
  */
 @Entity
-public class TipoEntrega implements Serializable {
+public class EstadoEncomenda implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -27,21 +27,24 @@ public class TipoEntrega implements Serializable {
   private String descricao;
 
   @JsonBackReference
-  @ManyToMany(mappedBy = "tiposEntrega")
-  private List<Restaurante> restaurantes = new ArrayList<>();
-  
-  @JsonBackReference
-  @OneToMany(mappedBy = "tipoEntrega")
-  private List<Encomenda> encomendas = new ArrayList<>();
+  @OneToMany(mappedBy = "estadoEncomenda")
+  private List<EstadoEncomendaHora> encomendas = new ArrayList<>();
 
-  public TipoEntrega() {}
+  @JsonBackReference
+  @OneToMany(mappedBy = "estado", fetch = FetchType.EAGER)
+  private List<EncomendaRestaurante> parcelas = new ArrayList<>();
+
+  public EstadoEncomenda() {
+    super();
+  }
 
   /**
-   * Constructor.
-   * @param id id do tipo de entrega.
-   * @param descricao descricao do tipo de entrega.
+   * Construtor.
+   * 
+   * @param id id do estado.
+   * @param descricao descricao.
    */
-  public TipoEntrega(Integer id, String descricao) {
+  public EstadoEncomenda(Integer id, String descricao) {
     super();
     this.id = id;
     this.descricao = descricao;
@@ -63,21 +66,19 @@ public class TipoEntrega implements Serializable {
     this.descricao = descricao;
   }
 
-  public List<Restaurante> getRestaurantes() {
-    return restaurantes;
+  public List<EncomendaRestaurante> getParcelas() {
+    return parcelas;
   }
 
-  public void setRestaurantes(List<Restaurante> restaurantes) {
-    this.restaurantes = restaurantes;
+  public void setParcelas(List<EncomendaRestaurante> parcelas) {
+    this.parcelas = parcelas;
   }
-  
-  
 
-  public List<Encomenda> getEncomendas() {
+  public List<EstadoEncomendaHora> getEncomendas() {
     return encomendas;
   }
 
-  public void setEncomendas(List<Encomenda> encomendas) {
+  public void setEncomendas(List<EstadoEncomendaHora> encomendas) {
     this.encomendas = encomendas;
   }
 
@@ -100,7 +101,7 @@ public class TipoEntrega implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    TipoEntrega other = (TipoEntrega) obj;
+    EstadoEncomenda other = (EstadoEncomenda) obj;
     if (id == null) {
       if (other.id != null) {
         return false;
@@ -110,5 +111,7 @@ public class TipoEntrega implements Serializable {
     }
     return true;
   }
+
+
 
 }
