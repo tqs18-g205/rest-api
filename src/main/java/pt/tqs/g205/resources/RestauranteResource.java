@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pt.tqs.g205.domain.Reserva;
 import pt.tqs.g205.domain.Restaurante;
+import pt.tqs.g205.services.ReservaService;
 import pt.tqs.g205.services.RestauranteService;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class RestauranteResource {
 
   @Autowired
   private RestauranteService restauranteService;
+  
+  @Autowired
+  private ReservaService reservaService;
 
   /**
    * Endpoint para obter lista de todos os restaurantes.
@@ -43,6 +48,18 @@ public class RestauranteResource {
     Restaurante restaurante = restauranteService.getById(id);
 
     return ResponseEntity.ok(restaurante);
+  }
+  
+  /**
+   * Endpoint para um restaurante obter as suas reservas.
+   * @param id id do restaurante.
+   * @return lista de reservas.
+   */
+  @RequestMapping(value = "/{id}/reservas", method = RequestMethod.GET)
+  public ResponseEntity<List<Reserva>> getReservas(@PathVariable("id") Integer id) {
+    List<Reserva> reservas = reservaService.getByRestauranteId(id);
+
+    return ResponseEntity.ok(reservas);
   }
 
 }

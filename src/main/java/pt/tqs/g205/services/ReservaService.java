@@ -78,9 +78,27 @@ public class ReservaService {
     List<Reserva> reservas = reservaRepo.getByCliente(cli);
 
     reservas.forEach(e -> {
-      e.getRestaurante().setPratos(Collections.emptyList());
-      e.getRestaurante().setReservas(Collections.emptyList());
-      e.getRestaurante().setTiposEntrega(Collections.emptyList());
+      e.getRestaurante().setPratos(null);
+      e.getRestaurante().setReservas(null);
+      e.getRestaurante().setTiposEntrega(null);
+    });
+
+    return reservas;
+  }
+  
+  /**
+   * Lista todas as reservas efetuadas para um restaurante.
+   * @param id id do restaurante.
+   * @return lista de todas as reservas.
+   */
+  public List<Reserva> getByRestauranteId(Integer id) {
+    Restaurante res = restauranteService.getById(id);
+    List<Reserva> reservas = reservaRepo.getByRestaurante(res);
+
+    reservas.forEach(e -> {
+      e.getRestaurante().setPratos(null);
+      e.getRestaurante().setReservas(null);
+      e.getRestaurante().setTiposEntrega(null);
     });
 
     return reservas;

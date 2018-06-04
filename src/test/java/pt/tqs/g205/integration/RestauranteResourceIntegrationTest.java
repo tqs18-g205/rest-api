@@ -34,4 +34,11 @@ public class RestauranteResourceIntegrationTest {
       .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
       .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1));
   }
+  
+  @Test
+  public void getReservas() throws Exception {
+    this.mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurantes/1/reservas"))
+      .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+      .andExpect(MockMvcResultMatchers.jsonPath("@.[0].id").value(1));
+  }
 }
