@@ -29,6 +29,7 @@ public class Restaurante implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String nome;
+  private String imagem;
 
   @JsonManagedReference
   @ManyToOne
@@ -121,6 +122,16 @@ public class Restaurante implements Serializable {
 
   public void setMoradas(List<Morada> moradas) {
     this.moradas = moradas;
+  }
+  
+  
+
+  public String getImagem() {
+    return imagem;
+  }
+
+  public void setImagem(String imagem) {
+    this.imagem = imagem;
   }
 
   @Override

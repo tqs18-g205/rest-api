@@ -41,13 +41,13 @@ public class ReservaServiceIntegration {
   @Before
   public void setup() {
     cli = clienteRepo.findById(1).get();
+    
+    Mockito.when(userService.authenticated())
+      .thenReturn(new ClienteSs(cli.getId(), cli.getEmail(), cli.getPasswd()));
   }
   
   @Test
   public void fazerReserva() {
-    Mockito.when(userService.authenticated())
-      .thenReturn(new ClienteSs(cli.getId(), cli.getEmail(), cli.getPasswd()));
-    
     Reserva reserva = reservaService.fazerReserva(1, 1, "03-07-2018", "20:00");
     Assertions.assertThat(reserva).isNotNull();
     Assertions.assertThat(reserva.getCliente()).isEqualTo(cli);
@@ -62,5 +62,15 @@ public class ReservaServiceIntegration {
     Reserva res = reservas.iterator().next();
     Assertions.assertThat(res).isNotNull();
     Assertions.assertThat(res.getCliente().getId()).isEqualTo(1);
+  }
+  
+  @Test
+  public void getByRestauranteId() {
+    List<Reserva> reservas = reservaService.getByRestauranteId(1);
+    Assertions.assertThat(reservas).isNotNull();
+    Assertions.assertThat(reservas).isNotEmpty();
+    Reserva res = reservas.iterator().next();
+    Assertions.assertThat(res).isNotNull();
+    Assertions.assertThat(res.getRestaurante().getId()).isEqualTo(1);
   }
 }

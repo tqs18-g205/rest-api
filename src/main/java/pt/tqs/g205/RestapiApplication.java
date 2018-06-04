@@ -117,8 +117,12 @@ public class RestapiApplication implements CommandLineRunner {
     tipoEntregaRepo.saveAll(Arrays.asList(entrega1, entrega2));
     
     final Restaurante res = new Restaurante(null, "O Moliceiro", tipo1);
+    res.setImagem("https://lifecooler.com/files/registos/imagens/330822/330144.jpg");
     final Restaurante res2 = new Restaurante(null, "La Grotta", tipo2);
+    res2.setImagem("https://media-cdn.tripadvisor.com/"
+        + "media/photo-s/0d/04/22/cc/img-20160918-202949-largejpg.jpg");
     final Restaurante res3 = new Restaurante(null, "Refúgio", tipo1);
+    res3.setImagem("https://lifecooler.com/files/registos/imagens/459666/389929.jpg");
     
     tipoCozinhaRepo.saveAll(Arrays.asList(tipo1, tipo2));
     restauranteRepo.saveAll(Arrays.asList(res, res2, res3));
