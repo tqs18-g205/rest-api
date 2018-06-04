@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -41,13 +43,25 @@ public class EncomendaRestauranteService {
   public List<EncomendaRestaurante> criarParcelas(Encomenda enc) {
     List<EncomendaRestaurante> parcelas = new ArrayList<>();
     
-    EstadoEncomenda estado = estadoEncomendaRepo.findById(1).get();
+    Optional<EstadoEncomenda> optEstado = estadoEncomendaRepo.findById(1);
+    
+    if (!optEstado.isPresent()) {
+      throw new NoSuchElementException();
+    }
+    
+    EstadoEncomenda estado = optEstado.get();
     
     Set<Integer> restaurantes = new HashSet<>();
     
     for (PratosPorEncomenda ppe : enc.getPratos()) {
-       Prato prato = pratoRepo.findById(ppe.getId().getPratoId()).get();
-       restaurantes.add(prato.getRestaurante().getId());
+      Optional<Prato> optPrato = pratoRepo.findById(ppe.getId().getPratoId());
+      
+      if (!optPrato.isPresent()) {
+        throw new NoSuchElementException();
+      }
+      
+      Prato prato = optPrato.get();
+      restaurantes.add(prato.getRestaurante().getId());
     }
     
     restaurantes.forEach(res -> { 

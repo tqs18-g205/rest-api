@@ -16,6 +16,11 @@ public class EncomendaModel implements Serializable {
     super();
   }
 
+  /**
+   * Construtor.
+   * @param tipoEntrega id do tipo da entrega.
+   * @param cliente id do cliente.
+   */
   public EncomendaModel(Integer tipoEntrega, Integer cliente) {
     super();
     this.tipoEntrega = tipoEntrega;

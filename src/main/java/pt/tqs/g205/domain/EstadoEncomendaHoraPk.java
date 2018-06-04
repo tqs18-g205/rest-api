@@ -9,7 +9,7 @@ import javax.persistence.Embeddable;
  * Chave primaria da tabela de estados de encomenda por hora.
  */
 @Embeddable
-public class EstadoEncomendaHoraPK implements Serializable {
+public class EstadoEncomendaHoraPk implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class EstadoEncomendaHoraPK implements Serializable {
   @Column(name = "estado_encomenda_id")
   private Integer estado;
 
-  public EstadoEncomendaHoraPK() {}
+  public EstadoEncomendaHoraPk() {}
 
   /**
    * Construtor.
@@ -27,7 +27,7 @@ public class EstadoEncomendaHoraPK implements Serializable {
    * @param encomenda id da encomenda.
    * @param estado id do estado.
    */
-  public EstadoEncomendaHoraPK(Integer encomenda, Integer estado) {
+  public EstadoEncomendaHoraPk(Integer encomenda, Integer estado) {
     super();
     this.encomenda = encomenda;
     this.estado = estado;
@@ -69,7 +69,7 @@ public class EstadoEncomendaHoraPK implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    EstadoEncomendaHoraPK other = (EstadoEncomendaHoraPK) obj;
+    EstadoEncomendaHoraPk other = (EstadoEncomendaHoraPk) obj;
     if (encomenda == null) {
       if (other.encomenda != null) {
         return false;

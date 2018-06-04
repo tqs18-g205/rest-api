@@ -4,13 +4,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import pt.tqs.g205.domain.PratosPorEncomenda;
-import pt.tqs.g205.domain.PratosPorEncomendaPK;
+import pt.tqs.g205.domain.PratosPorEncomendaPk;
 
 /**
  * Operacoes de persistencia para a entidade PratosPorEncomenda.
  */
 @Repository
 public interface PratosPorEncomendaRepository
-    extends JpaRepository<PratosPorEncomenda, PratosPorEncomendaPK> {
+    extends JpaRepository<PratosPorEncomenda, PratosPorEncomendaPk> {
 
 }

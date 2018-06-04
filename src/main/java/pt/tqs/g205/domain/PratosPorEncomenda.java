@@ -22,7 +22,7 @@ public class PratosPorEncomenda implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @EmbeddedId
-  private PratosPorEncomendaPK id;
+  private PratosPorEncomendaPk id;
 
   @JsonBackReference
   @ManyToOne
@@ -50,15 +50,15 @@ public class PratosPorEncomenda implements Serializable {
     super();
     this.encomenda = encomenda;
     this.prato = prato;
-    this.id = new PratosPorEncomendaPK(encomenda.getId(), prato.getId());
+    this.id = new PratosPorEncomendaPk(encomenda.getId(), prato.getId());
     this.quantity = quantity;
   }
 
-  public PratosPorEncomendaPK getId() {
+  public PratosPorEncomendaPk getId() {
     return id;
   }
 
-  public void setId(PratosPorEncomendaPK id) {
+  public void setId(PratosPorEncomendaPk id) {
     this.id = id;
   }
 

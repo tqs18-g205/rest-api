@@ -22,7 +22,7 @@ public class EstadoEncomendaHora implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @EmbeddedId
-  private EstadoEncomendaHoraPK id;
+  private EstadoEncomendaHoraPk id;
 
   @JsonBackReference
   @ManyToOne
@@ -58,7 +58,7 @@ public class EstadoEncomendaHora implements Serializable {
     this.estadoEncomenda = estadoEncomenda;
     this.data = data;
     this.hora = hora;
-    this.id = new EstadoEncomendaHoraPK(encomenda.getId(), estadoEncomenda.getId());
+    this.id = new EstadoEncomendaHoraPk(encomenda.getId(), estadoEncomenda.getId());
   }
 
 
@@ -81,11 +81,11 @@ public class EstadoEncomendaHora implements Serializable {
     this.data = data;
   }
 
-  public EstadoEncomendaHoraPK getId() {
+  public EstadoEncomendaHoraPk getId() {
     return id;
   }
 
-  public void setId(EstadoEncomendaHoraPK id) {
+  public void setId(EstadoEncomendaHoraPk id) {
     this.id = id;
   }
 

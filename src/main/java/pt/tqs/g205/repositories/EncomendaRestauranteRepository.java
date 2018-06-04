@@ -11,6 +11,7 @@ import java.util.List;
  * Operacoes de persistencia para a entidade EncomendaRestaurante.
  */
 @Repository
-public interface EncomendaRestauranteRepository extends JpaRepository<EncomendaRestaurante, Integer> {
+public interface EncomendaRestauranteRepository 
+    extends JpaRepository<EncomendaRestaurante, Integer> {
   public List<EncomendaRestaurante> findByRestaurante(Integer restaurante);
 }

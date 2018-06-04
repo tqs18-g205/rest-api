@@ -77,9 +77,9 @@ public class EncomendaService {
       Iterator<PratosPorEncomenda> it = e.getPratos().iterator();
 
       while (it.hasNext()) {
-        Prato p = it.next().getPrato();
-        p.setIngredientes(null);
-        p.setRestaurante(null);
+        Prato pr = it.next().getPrato();
+        pr.setIngredientes(null);
+        pr.setRestaurante(null);
 
       }
     });
@@ -93,11 +93,12 @@ public class EncomendaService {
    * @return lista das encomendas do cliente.
    * @throws NoSuchElementException se o cliente nao existir.
    */
-  public List<Encomenda> getByClienteId(Integer clienteId) throws NoSuchElementException {
+  public List<Encomenda> getByClienteId(Integer clienteId) {
     List<Encomenda> encomendas = encomendaRepo.getByClienteId(clienteId);
 
-    if (encomendas == null || encomendas.size() == 0)
+    if (encomendas == null || encomendas.isEmpty()) {
       throw new NoSuchElementException();
+    }
 
     encomendas.forEach(e -> {
       Iterator<PratosPorEncomenda> it = e.getPratos().iterator();
@@ -105,9 +106,9 @@ public class EncomendaService {
       while (it.hasNext()) {
         PratosPorEncomenda ppe = it.next();
         ppe.setId(null);
-        Prato p = ppe.getPrato();
-        p.setIngredientes(null);
-        p.setRestaurante(null);
+        Prato pr = ppe.getPrato();
+        pr.setIngredientes(null);
+        pr.setRestaurante(null);
       }
 
       Iterator<EstadoEncomendaHora> estadosIt = e.getEstados().iterator();
@@ -132,8 +133,8 @@ public class EncomendaService {
   public Encomenda fazerEncomenda(Integer cliente, EncomendaModel encomenda) {
 
     Cliente cli = clienteService.getById(cliente);
-    TipoEntrega entrega = tipoEntregaService.getById(encomenda.getTipoEntrega());
-    EstadoEncomenda estado = estadoEncomendaService.getById(1);
+    final TipoEntrega entrega = tipoEntregaService.getById(encomenda.getTipoEntrega());
+    final EstadoEncomenda estado = estadoEncomendaService.getById(1);
 
     Encomenda enc = encomendaRepo.save(new Encomenda(null, entrega, cli));
 
@@ -151,14 +152,15 @@ public class EncomendaService {
 
     List<Prato> pratos = new ArrayList<>();
 
-    encomenda.getPratos().keySet().forEach(pratoId -> {
-      pratos.add(pratoService.getPratoById(pratoId));
-    });
+    encomenda.getPratos().keySet().forEach(pratoId -> pratos.add(
+        pratoService.getPratoById(pratoId))
+    );
 
     List<PratosPorEncomenda> pratosEnc = new ArrayList<>();
     
     pratos.forEach(prato -> {
-      PratosPorEncomenda ppe = new PratosPorEncomenda(enc, prato, encomenda.getPratos().get(prato.getId()));
+      PratosPorEncomenda ppe = new PratosPorEncomenda(enc, prato, 
+          encomenda.getPratos().get(prato.getId()));
       pratosEnc.add(ppe);
       prato.getEncomendas().add(ppe);
     });

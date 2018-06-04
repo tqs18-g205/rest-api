@@ -9,7 +9,7 @@ import javax.persistence.Embeddable;
  * Chave primaria da tabela de pratos por encomenda.
  */
 @Embeddable
-public class PratosPorEncomendaPK implements Serializable {
+public class PratosPorEncomendaPk implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -19,14 +19,14 @@ public class PratosPorEncomendaPK implements Serializable {
   @Column(name = "prato_id")
   private Integer pratoId;
 
-  public PratosPorEncomendaPK() {}
+  public PratosPorEncomendaPk() {}
 
   /**
    * Construtor.
    * @param encomendaId id da encomenda.
    * @param pratoId id do prato.
    */
-  public PratosPorEncomendaPK(Integer encomendaId, Integer pratoId) {
+  public PratosPorEncomendaPk(Integer encomendaId, Integer pratoId) {
     super();
     this.encomendaId = encomendaId;
     this.pratoId = pratoId;
@@ -68,7 +68,7 @@ public class PratosPorEncomendaPK implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    PratosPorEncomendaPK other = (PratosPorEncomendaPK) obj;
+    PratosPorEncomendaPk other = (PratosPorEncomendaPk) obj;
     if (encomendaId == null) {
       if (other.encomendaId != null) {
         return false;
