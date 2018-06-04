@@ -136,4 +136,22 @@ public class ClienteResourceIntegrationTest {
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
   
+  @Test
+  public void getEncomendasCliente() throws Exception {
+    String token = jwtUtil.generateToken(cli.getEmail());
+    this.mockMvc.perform(
+        MockMvcRequestBuilders.get("/api/clientes/1/encomendas")
+        .header("Authorization", "Bearer " + token))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+  
+  @Test
+  public void getEncomenda() throws Exception {
+    String token = jwtUtil.generateToken(cli.getEmail());
+    this.mockMvc.perform(
+        MockMvcRequestBuilders.get("/api/clientes/1/encomendas/1")
+        .header("Authorization", "Bearer " + token))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+  
 }
