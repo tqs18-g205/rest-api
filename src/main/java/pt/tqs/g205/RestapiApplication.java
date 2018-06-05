@@ -509,7 +509,7 @@ public class RestapiApplication implements CommandLineRunner {
         LocalDate.now(), LocalTime.now());
     
     eehRepo.saveAll(Arrays.asList(eeh));
-    PratosPorEncomenda ppe1 = new PratosPorEncomenda(enc, p1, 2);
+    PratosPorEncomenda ppe1 = new PratosPorEncomenda(enc, p1, 1);
     PratosPorEncomenda ppe2 = new PratosPorEncomenda(enc, p7, 1);
     ppeRepo.saveAll(Arrays.asList(ppe1, ppe2));
     enc.setEstados(Arrays.asList(eeh));
@@ -528,7 +528,7 @@ public class RestapiApplication implements CommandLineRunner {
         LocalDate.now(), LocalTime.now());
     
     eehRepo.saveAll(Arrays.asList(eeh2));
-    PratosPorEncomenda ppe3 = new PratosPorEncomenda(enc2, p2, 2);
+    PratosPorEncomenda ppe3 = new PratosPorEncomenda(enc2, p2, 1);
     PratosPorEncomenda ppe4 = new PratosPorEncomenda(enc2, p4, 1);
     
     ppeRepo.saveAll(Arrays.asList(ppe3, ppe4));
@@ -549,7 +549,7 @@ public class RestapiApplication implements CommandLineRunner {
         LocalDate.now(), LocalTime.now());
     
     eehRepo.saveAll(Arrays.asList(eeh3));
-    PratosPorEncomenda ppe5 = new PratosPorEncomenda(enc3, p3, 2);
+    PratosPorEncomenda ppe5 = new PratosPorEncomenda(enc3, p3, 1);
     
     ppeRepo.saveAll(Arrays.asList(ppe5));
     enc3.setEstados(Arrays.asList(eeh3));
