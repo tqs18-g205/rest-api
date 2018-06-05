@@ -530,13 +530,26 @@ public class RestapiApplication implements CommandLineRunner {
     PratosPorEncomenda ppe4 = new PratosPorEncomenda(enc2, p4, 1);
     
     ppeRepo.saveAll(Arrays.asList(ppe3, ppe4));
-    p2.getEncomendas().add(ppe3);
-    p4.getEncomendas().add(ppe4);
-    pratoRepo.saveAll(Arrays.asList(p2, p4));
     enc2.setEstados(Arrays.asList(eeh2));
     enc2.setPratos(Arrays.asList(ppe3, ppe4));
     encomendaRepo.saveAll(Arrays.asList(enc2));
     encomendaRestauranteService.criarParcelas(enc2);
     
+    
+    Encomenda enc3 = new Encomenda(null, entrega1, cli);
+    
+    encomendaRepo.saveAll(Arrays.asList(enc3));
+    
+    EstadoEncomendaHora eeh3 = new EstadoEncomendaHora(enc3, eec1,
+        LocalDate.now(), LocalTime.now());
+    
+    eehRepo.saveAll(Arrays.asList(eeh3));
+    PratosPorEncomenda ppe5 = new PratosPorEncomenda(enc3, p3, 2);
+    
+    ppeRepo.saveAll(Arrays.asList(ppe5));
+    enc3.setEstados(Arrays.asList(eeh3));
+    enc3.setPratos(Arrays.asList(ppe5));
+    encomendaRepo.saveAll(Arrays.asList(enc3));
+    encomendaRestauranteService.criarParcelas(enc3);
   }
 }
