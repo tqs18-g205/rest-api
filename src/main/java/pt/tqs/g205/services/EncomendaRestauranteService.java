@@ -26,6 +26,9 @@ import java.util.Set;
 @Service
 public class EncomendaRestauranteService {
   @Autowired
+  private EncomendaService encomendaService;
+  
+  @Autowired
   private EstadoEncomendaRepository estadoEncomendaRepo;
   
   @Autowired
@@ -50,12 +53,13 @@ public class EncomendaRestauranteService {
     
     Optional<EstadoEncomenda> optEstado = estadoEncomendaRepo.findById(1);
     
+    if (!optEstado.isPresent()) {
+      throw new NoSuchElementException();
+    }
+    
     EstadoEncomenda estado = optEstado.get();
     
     Set<Integer> restaurantes = new HashSet<>();
-    
-    if (enc.getPratos().isEmpty()) 
-      throw new RuntimeException();
     
     for (PratosPorEncomenda ppe : enc.getPratos()) {
       Optional<Prato> optPrato = pratoRepo.findById(ppe.getId().getPratoId());
@@ -166,7 +170,7 @@ public class EncomendaRestauranteService {
     EncomendaRestaurante updated = encomendaRestauranteRepo.save(parcela);
     
     Encomenda enc = updated.getEncomenda();
-    enc.updateEstado();
+    encomendaService.updateEstado(enc);
     encomendaRepo.saveAll(Arrays.asList(enc));
     
     
