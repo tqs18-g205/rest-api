@@ -32,7 +32,7 @@ public class RestauranteResourceIntegrationTest {
   
   /**
    * Setup dos testes.
-   * @throws Exception 
+   * @throws Exception if not a valid json object.
    */
   @Before
   public void setup() throws Exception {
