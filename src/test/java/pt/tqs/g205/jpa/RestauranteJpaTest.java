@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pt.tqs.g205.jpa;
 
 import org.assertj.core.api.Assertions;
@@ -16,13 +11,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
 import pt.tqs.g205.domain.Restaurante;
 import pt.tqs.g205.domain.TipoCozinha;
 
-/**
- *
- * @author joseppmoreira
- */
 @SpringBootTest
 @AutoConfigureDataJpa
 @AutoConfigureTestDatabase
@@ -30,25 +22,25 @@ import pt.tqs.g205.domain.TipoCozinha;
 @Transactional
 @RunWith(SpringRunner.class)
 public class RestauranteJpaTest {
-    
-    @Autowired
-    private TestEntityManager tem;
 
-    @Test
-    public void mapping() {
-        TipoCozinha tc = new TipoCozinha(null, "Italiano");
-        Restaurante r = new Restaurante(null, "Moliceiro", tc);
-        
-        tem.persistAndFlush(tc);
-        
-        Restaurante persisted = tem.persistAndFlush(r);
-        Assertions.assertThat(persisted.getId()).isNotNull();
-        Assertions.assertThat(persisted.getId()).isGreaterThan(0);
-        Assertions.assertThat(persisted.getNome()).isEqualTo("Moliceiro");
-        Assertions.assertThat(persisted.getPratos()).isEmpty();
-        Assertions.assertThat(persisted.getReservas()).isEmpty();
-        Assertions.assertThat(persisted.getTiposEntrega()).isEmpty();
-        Assertions.assertThat(persisted.getTipoCozinha()).isEqualTo(tc);
-    }
- 
+  @Autowired
+  private TestEntityManager tem;
+
+  @Test
+  public void mapping() {
+    TipoCozinha tc = new TipoCozinha(null, "Italiano");
+    Restaurante rest = new Restaurante(null, "Moliceiro", tc);
+
+    tem.persistAndFlush(tc);
+
+    Restaurante persisted = tem.persistAndFlush(rest);
+    Assertions.assertThat(persisted.getId()).isNotNull();
+    Assertions.assertThat(persisted.getId()).isGreaterThan(0);
+    Assertions.assertThat(persisted.getNome()).isEqualTo("Moliceiro");
+    Assertions.assertThat(persisted.getPratos()).isEmpty();
+    Assertions.assertThat(persisted.getReservas()).isEmpty();
+    Assertions.assertThat(persisted.getTiposEntrega()).isEmpty();
+    Assertions.assertThat(persisted.getTipoCozinha()).isEqualTo(tc);
+  }
+
 }
