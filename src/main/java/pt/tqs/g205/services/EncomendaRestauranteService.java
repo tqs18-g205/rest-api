@@ -151,12 +151,13 @@ public class EncomendaRestauranteService {
   
   /**
    * Atualizar estado da encomenda.
+   * @param parcelaId id da parcela.
    * @param model dados para atualizar.
    * @return parcela atualizada.
    */
-  public EncomendaRestaurante updateParcela(AtualizarParcelaModel model) {
+  public EncomendaRestaurante updateParcela(Integer parcelaId, AtualizarParcelaModel model) {
     Optional<EncomendaRestaurante> optParcela = 
-        encomendaRestauranteRepo.findById(model.getEncomenda());
+        encomendaRestauranteRepo.findById(parcelaId);
     
     if (!optParcela.isPresent()) {
       throw new NoSuchElementException();

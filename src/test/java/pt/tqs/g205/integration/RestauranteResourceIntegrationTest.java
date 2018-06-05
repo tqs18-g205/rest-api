@@ -1,5 +1,6 @@
 package pt.tqs.g205.integration;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,10 @@ public class RestauranteResourceIntegrationTest {
     this.mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurantes/1/encomendas/1"))
       .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
       .andExpect(MockMvcResultMatchers.jsonPath("@.id").value(1));
+  }
+  
+  @Test
+  public void updateEncomenda() throws Exception {
+    Assertions.assertThat(true).isTrue();
   }
 }

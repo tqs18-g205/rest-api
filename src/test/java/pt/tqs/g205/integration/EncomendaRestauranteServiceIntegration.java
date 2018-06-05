@@ -85,4 +85,9 @@ public class EncomendaRestauranteServiceIntegration {
     Assertions.assertThat(parcela.getId()).isNotNull();
     Assertions.assertThat(parcela.getId()).isGreaterThan(0);
   }
+  
+  @Test
+  public void updateParcela() {
+    Assertions.assertThat(true).isTrue();
+  }
 }

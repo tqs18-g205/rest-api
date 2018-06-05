@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class AtualizarParcelaModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
-  private Integer encomenda;
   private Integer estado;
   
   public AtualizarParcelaModel() {
@@ -17,22 +16,13 @@ public class AtualizarParcelaModel implements Serializable {
 
   /**
    * Construtor.
-   * @param encomenda id da encomenda.
    * @param estado id do novo estado.
    */
-  public AtualizarParcelaModel(Integer encomenda, Integer estado) {
+  public AtualizarParcelaModel(Integer estado) {
     super();
-    this.encomenda = encomenda;
     this.estado = estado;
   }
 
-  public Integer getEncomenda() {
-    return encomenda;
-  }
-
-  public void setEncomenda(Integer encomenda) {
-    this.encomenda = encomenda;
-  }
 
   public Integer getEstado() {
     return estado;

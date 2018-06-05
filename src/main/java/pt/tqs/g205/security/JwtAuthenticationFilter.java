@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import pt.tqs.g205.dto.CredentialsDto;
+import pt.tqs.g205.dto.LoginDto;
 import pt.tqs.g205.services.exceptions.AuthorizationException;
 
 import java.io.IOException;
@@ -50,8 +51,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     String username = ((ClienteSs) auth.getPrincipal()).getUsername();
     Integer id = ((ClienteSs) auth.getPrincipal()).getId();
     String token = jwtUtil.generateToken(username);
-    res.addHeader("Authorization", "Bearer " + token);
-    res.addHeader("Client", id.toString());
     
+    res.addHeader("Authorization", "Bearer " + token);
+    LoginDto dto = new LoginDto(id, "Bearer " + token);
+    
+    res.getWriter().write(new ObjectMapper().writeValueAsString(dto));
   }
 }

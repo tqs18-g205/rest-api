@@ -106,7 +106,7 @@ public class RestauranteResource {
   @RequestMapping(value = "/{id}/encomendas/{encomenda}", method = RequestMethod.PUT)
   public ResponseEntity<EncomendaRestaurante> updateEncomendas(@PathVariable("id") Integer id, 
       @PathVariable("encomenda") Integer encomenda, @RequestBody AtualizarParcelaModel model) {
-    EncomendaRestaurante parcela = encomendaRestauranteService.updateParcela(model);
+    EncomendaRestaurante parcela = encomendaRestauranteService.updateParcela(encomenda, model);
 
     return ResponseEntity.ok(parcela);
   }
