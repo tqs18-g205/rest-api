@@ -50,7 +50,6 @@ public class ReservaService {
     String[] dt = data.split("-");
     LocalDate date =
         LocalDate.of(Integer.parseInt(dt[2]), Integer.parseInt(dt[1]), Integer.parseInt(dt[0]));
-
     String[] hr = hora.split(":");
     LocalTime hour = LocalTime.of(Integer.parseInt(hr[0]), Integer.parseInt(hr[1]));
 

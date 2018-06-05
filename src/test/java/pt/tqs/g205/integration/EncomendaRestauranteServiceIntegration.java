@@ -12,9 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pt.tqs.g205.domain.Encomenda;
 import pt.tqs.g205.domain.EncomendaRestaurante;
+import pt.tqs.g205.domain.EstadoEncomenda;
 import pt.tqs.g205.dto.EncomendaRestauranteDto;
+import pt.tqs.g205.resources.models.AtualizarParcelaModel;
 import pt.tqs.g205.services.EncomendaRestauranteService;
 import pt.tqs.g205.services.EncomendaService;
+import pt.tqs.g205.services.EstadoEncomendaService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,7 +33,12 @@ public class EncomendaRestauranteServiceIntegration {
   @Autowired
   private EncomendaService encomendaService;
   
+  @Autowired
+  private EstadoEncomendaService estadoEncomendaService;
+  
   private Encomenda enc;
+  private AtualizarParcelaModel model;
+  private EstadoEncomenda estadoEncomenda;
   
   /**
    * Setup dos testes.
@@ -38,6 +46,8 @@ public class EncomendaRestauranteServiceIntegration {
   @Before
   public void setup() {
     enc = encomendaService.getEncomendaById(1);
+    model = new AtualizarParcelaModel(2);
+    estadoEncomenda = estadoEncomendaService.getById(2);
   }
   
   @Test
@@ -88,6 +98,10 @@ public class EncomendaRestauranteServiceIntegration {
   
   @Test
   public void updateParcela() {
-    Assertions.assertThat(true).isTrue();
+    EncomendaRestaurante parcela = encomendaRestauranteService.updateParcela(1, model);
+    Assertions.assertThat(parcela).isNotNull();
+    Assertions.assertThat(parcela.getEstado()).isNotNull();
+    Assertions.assertThat(parcela.getEstado()).isEqualTo(estadoEncomenda);
+    Assertions.assertThat(parcela.getId()).isEqualTo(1);
   }
 }
