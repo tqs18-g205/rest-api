@@ -104,7 +104,7 @@ public class RestapiApplication implements CommandLineRunner {
     
     
     clienteRepo.saveAll(Arrays.asList(cli));
-    cli.setMoradas(Arrays.asList(morada));
+    cli.setMorada(morada);
     moradaRepo.saveAll(Arrays.asList(morada));
     clienteRepo.saveAll(Arrays.asList(cli));
 
@@ -124,6 +124,9 @@ public class RestapiApplication implements CommandLineRunner {
     final Restaurante res3 = new Restaurante(null, "Refúgio", tipo1);
     res3.setImagem("https://lifecooler.com/files/registos/imagens/459666/389929.jpg");
     
+    res.setTiposEntrega(Arrays.asList(entrega1));
+    res2.setTiposEntrega(Arrays.asList(entrega1, entrega2));
+    res3.setTiposEntrega(Arrays.asList(entrega2));
     tipoCozinhaRepo.saveAll(Arrays.asList(tipo1, tipo2));
     restauranteRepo.saveAll(Arrays.asList(res, res2, res3));
     tipo1.setRestaurantes(Arrays.asList(res));
@@ -137,9 +140,9 @@ public class RestapiApplication implements CommandLineRunner {
         null, res3);
     
     moradaRepo.saveAll(Arrays.asList(morada2, morada3, morada4));
-    res.setMoradas(Arrays.asList(morada2));
-    res2.setMoradas(Arrays.asList(morada3));
-    res3.setMoradas(Arrays.asList(morada4));
+    res.setMorada(morada2);
+    res2.setMorada(morada3);
+    res3.setMorada(morada4);
     
     final CategoriaPrato c1 = new CategoriaPrato(null, "Carne");
     final CategoriaPrato c2 = new CategoriaPrato(null, "Peixe");
@@ -491,7 +494,7 @@ public class RestapiApplication implements CommandLineRunner {
     reservaRepo.saveAll(Arrays.asList(reserva));
     
     
-    EstadoEncomenda eec1 = new EstadoEncomenda(null, "Recebido");
+    EstadoEncomenda eec1 = new EstadoEncomenda(null, "Em processamento");
     EstadoEncomenda eec2 = new EstadoEncomenda(null, "Em preparação");
     EstadoEncomenda eec3 = new EstadoEncomenda(null, "Pronta para entrega");
     EstadoEncomenda eec4 = new EstadoEncomenda(null, "Entregue");
@@ -513,5 +516,40 @@ public class RestapiApplication implements CommandLineRunner {
     enc.setPratos(Arrays.asList(ppe1, ppe2));
     encomendaRepo.saveAll(Arrays.asList(enc));
     encomendaRestauranteService.criarParcelas(enc);
+    
+    
+    Encomenda enc2 = new Encomenda(null, entrega1, cli);
+    
+    encomendaRepo.saveAll(Arrays.asList(enc2));
+    
+    EstadoEncomendaHora eeh2 = new EstadoEncomendaHora(enc2, eec1,
+        LocalDate.now(), LocalTime.now());
+    
+    eehRepo.saveAll(Arrays.asList(eeh2));
+    PratosPorEncomenda ppe3 = new PratosPorEncomenda(enc2, p2, 2);
+    PratosPorEncomenda ppe4 = new PratosPorEncomenda(enc2, p4, 1);
+    
+    ppeRepo.saveAll(Arrays.asList(ppe3, ppe4));
+    enc2.setEstados(Arrays.asList(eeh2));
+    enc2.setPratos(Arrays.asList(ppe3, ppe4));
+    encomendaRepo.saveAll(Arrays.asList(enc2));
+    encomendaRestauranteService.criarParcelas(enc2);
+    
+    
+    Encomenda enc3 = new Encomenda(null, entrega1, cli);
+    
+    encomendaRepo.saveAll(Arrays.asList(enc3));
+    
+    EstadoEncomendaHora eeh3 = new EstadoEncomendaHora(enc3, eec1,
+        LocalDate.now(), LocalTime.now());
+    
+    eehRepo.saveAll(Arrays.asList(eeh3));
+    PratosPorEncomenda ppe5 = new PratosPorEncomenda(enc3, p3, 2);
+    
+    ppeRepo.saveAll(Arrays.asList(ppe5));
+    enc3.setEstados(Arrays.asList(eeh3));
+    enc3.setPratos(Arrays.asList(ppe5));
+    encomendaRepo.saveAll(Arrays.asList(enc3));
+    encomendaRestauranteService.criarParcelas(enc3);
   }
 }

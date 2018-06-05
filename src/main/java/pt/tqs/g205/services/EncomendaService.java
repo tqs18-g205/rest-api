@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import pt.tqs.g205.domain.Cliente;
 import pt.tqs.g205.domain.Encomenda;
+import pt.tqs.g205.domain.EncomendaRestaurante;
 import pt.tqs.g205.domain.EstadoEncomenda;
 import pt.tqs.g205.domain.EstadoEncomendaHora;
 import pt.tqs.g205.domain.Prato;
@@ -22,14 +23,20 @@ import pt.tqs.g205.resources.models.EncomendaModel;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class EncomendaService {
 
+  @Autowired
+  private EstadoEncomendaHoraRepository estadoEncomendaHoraRepo;
+  
   @Autowired
   private EncomendaRepository encomendaRepo;
 
@@ -188,5 +195,23 @@ public class EncomendaService {
       throw new NoSuchElementException();
     }
     return enc.get();
+  }
+  
+  /**
+   * Atualiza estado da encomenda.
+   */
+  public void updateEstado(Encomenda enc) {
+    EstadoEncomenda now = enc.getEstados().get(enc.getEstados().size() - 1).getEstadoEncomenda();
+
+    Set<EstadoEncomenda> estadosParcelas = new HashSet<>();
+    List<EncomendaRestaurante> parcelas = enc.getParcelas();
+    
+    parcelas.forEach(par -> estadosParcelas.add(par.getEstado()));
+    if (estadosParcelas.size() == 1 && !estadosParcelas.contains(now)) {
+      EstadoEncomendaHora novoEstado = new EstadoEncomendaHora(enc,
+          estadosParcelas.iterator().next(), LocalDate.now(), LocalTime.now());
+      estadoEncomendaHoraRepo.saveAll(Arrays.asList(novoEstado));
+      enc.getEstados().add(novoEstado);
+    }
   }
 }

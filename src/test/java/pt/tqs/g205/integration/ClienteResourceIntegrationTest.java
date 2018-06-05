@@ -25,7 +25,6 @@ import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.resources.models.ReservaModel;
 import pt.tqs.g205.security.JwtUtil;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,7 +62,7 @@ public class ClienteResourceIntegrationTest {
   public void setup() throws Exception {
     morada = new MoradaModel("Rua xpto", "Gloria", "3810-456", "Aveiro");
     cliente = new RegistoClienteModel("Chico", "1234", "999999888", "john@doe.pt");
-    cliente.setMoradas(Arrays.asList(morada));
+    cliente.setMorada(morada);
     cli = clienteRepo.findById(1).get();
     
     reservaModel = new ReservaModel(1,1, "31-12-2018", "18:30");

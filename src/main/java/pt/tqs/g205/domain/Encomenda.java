@@ -4,12 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +26,7 @@ public class Encomenda implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+  private Double total;
 
   @JsonManagedReference
   @OneToMany(mappedBy = "encomenda")
@@ -119,20 +116,25 @@ public class Encomenda implements Serializable {
     this.estados = estados;
   }
   
+  public Double getTotal() {
+    return total;
+  }
 
+  public void setTotal(Double total) {
+    this.total = total;
+  }
+
+  
   /**
-   * Atualiza estado da encomenda.
+   * Calcula preco total da encomenda.
    */
-  public void updateEstado() {
-    EstadoEncomenda now = estados.get(estados.size() - 1).getEstadoEncomenda();
-
-    Set<EstadoEncomenda> estadosParcelas = new HashSet<>();
-    parcelas.forEach(par -> estadosParcelas.add(par.getEstado()));
-    if (estadosParcelas.size() == 1 && !estadosParcelas.contains(now)) {
-      EstadoEncomendaHora novoEstado = new EstadoEncomendaHora(this,
-          estadosParcelas.iterator().next(), LocalDate.now(), LocalTime.now());
-      estados.add(novoEstado);
+  public void calcularPreco() {
+    Double sum = 0.0;
+    for (PratosPorEncomenda ppe : pratos) {
+      Prato prato = ppe.getPrato();
+      sum += prato.getPreco() * ppe.getQuantity();
     }
+    this.total = sum;
   }
 
   @Override

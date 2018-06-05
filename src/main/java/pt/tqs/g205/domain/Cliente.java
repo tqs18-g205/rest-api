@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Clientes.
@@ -36,8 +37,8 @@ public class Cliente implements Serializable {
   private String passwd;
 
   @JsonManagedReference
-  @OneToMany(mappedBy = "cliente")
-  private List<Morada> moradas = new ArrayList<>();
+  @OneToOne(mappedBy = "cliente")
+  private Morada morada;
   
   @JsonBackReference
   @OneToMany(mappedBy = "cliente")
@@ -107,16 +108,14 @@ public class Cliente implements Serializable {
   public void setReservas(List<Reserva> reservas) {
     this.reservas = reservas;
   }
-
-  public List<Morada> getMoradas() {
-    return moradas;
+  
+  public Morada getMorada() {
+    return morada;
   }
 
-  public void setMoradas(List<Morada> moradas) {
-    this.moradas = moradas;
+  public void setMorada(Morada morada) {
+    this.morada = morada;
   }
-  
-  
 
   public List<Encomenda> getEncomendas() {
     return encomendas;

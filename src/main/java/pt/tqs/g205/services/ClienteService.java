@@ -13,7 +13,6 @@ import pt.tqs.g205.resources.models.RegistoClienteModel;
 import pt.tqs.g205.security.ClienteSs;
 import pt.tqs.g205.services.exceptions.AuthorizationException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -55,15 +54,12 @@ public class ClienteService {
     Cliente cli = new Cliente(null, cliente.getNome(),
         beCryptPasswordEncoder.encode(cliente.getPasswd()), cliente.getNif(), cliente.getEmail());
     clienteRepo.saveAll(Arrays.asList(cli));
-    List<MoradaModel> models = cliente.getMoradas();
-    List<Morada> moradas = new ArrayList<>();
-    models.forEach(m -> {
-      Morada temp = new Morada(null, m.getRua(), m.getLocalidade(), m.getCodigoPostal(),
-          m.getDistrito(), cli, null);
-      moradas.add(temp);
-    });
-    moradaRepo.saveAll(moradas);
-    cli.setMoradas(moradas);
+    MoradaModel model = cliente.getMorada();
+    
+    Morada temp = new Morada(null, model.getRua(), model.getLocalidade(), model.getCodigoPostal(),
+        model.getDistrito(), cli, null);
+    moradaRepo.saveAll(Arrays.asList(temp));
+    cli.setMorada(temp);
     List<Cliente> persisted = clienteRepo.saveAll(Arrays.asList(cli));
     return persisted.get(0);
   }

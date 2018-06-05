@@ -36,7 +36,6 @@ import pt.tqs.g205.services.ReservaService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(SpringRunner.class)
@@ -76,11 +75,11 @@ public class ClienteResourceTest {
   public void setup() throws Exception {
     morada = new MoradaModel("Rua xpto", "Gloria", "3810-456", "Aveiro");
     cliente = new RegistoClienteModel("Chico", "1234", "999999888", "john@doe.pt");
-    cliente.setMoradas(Arrays.asList(morada));
+    cliente.setMorada(morada);
     cli = new Cliente(1, cliente.getNome(), cliente.getPasswd(), cliente.getNif(),
         cliente.getEmail());
-    cli.setMoradas(Arrays.asList(new Morada(1, morada.getRua(), morada.getLocalidade(),
-        morada.getCodigoPostal(), morada.getDistrito(), cli, null)));
+    cli.setMorada(new Morada(1, morada.getRua(), morada.getLocalidade(),
+        morada.getCodigoPostal(), morada.getDistrito(), cli, null));
     reservaModel = new ReservaModel(1,2, "31-12-2018", "18:30");
     
     ObjectMapper mapper = new ObjectMapper();

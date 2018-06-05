@@ -18,7 +18,6 @@ import pt.tqs.g205.services.ClienteService;
 import pt.tqs.g205.services.exceptions.AuthorizationException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -48,9 +47,9 @@ public class ClienteServiceIntegrationTest {
     morada = new Morada(1, "Rua xpto", "Gloria", "3810-555", "Aveiro", cli, null);
     clienteModel = new RegistoClienteModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
     model = new MoradaModel("Rua xpto", "Gloria", "3810-555", "Aveiro");
-    clienteModel.setMoradas(Arrays.asList(model));
+    clienteModel.setMorada(model);
     cli = new Cliente(1, "Chico Matos", "1234", "999999999", "chico@matos.pt");
-    cli.setMoradas(Arrays.asList(morada));
+    cli.setMorada(morada);
     clientes = new ArrayList<>();
     clientes.add(cli);
   }
@@ -60,8 +59,7 @@ public class ClienteServiceIntegrationTest {
     Cliente cliente = clienteService.registerCliente(clienteModel);
 
     Assertions.assertThat(cliente.getId()).isGreaterThan(0);
-    Assertions.assertThat(cliente.getMoradas()).isNotNull();
-    Assertions.assertThat(cliente.getMoradas()).isNotEmpty();
+    Assertions.assertThat(cliente.getMorada()).isNotNull();
   }
 
   @Test(expected = AuthorizationException.class)
@@ -77,6 +75,6 @@ public class ClienteServiceIntegrationTest {
     Assertions.assertThat(listagem).isNotEmpty();
     Assertions.assertThat(listagem.get(0)).isNotNull();
     Assertions.assertThat(listagem.get(0).getId()).isEqualTo(1);
-    Assertions.assertThat(listagem.get(0).getMoradas()).isNotNull();
+    Assertions.assertThat(listagem.get(0).getMorada()).isNotNull();
   }
 }

@@ -3,6 +3,7 @@ package pt.tqs.g205.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import pt.tqs.g205.domain.EncomendaRestaurante;
 import pt.tqs.g205.domain.Reserva;
 import pt.tqs.g205.domain.Restaurante;
 import pt.tqs.g205.dto.EncomendaRestauranteDto;
+import pt.tqs.g205.resources.models.AtualizarParcelaModel;
 import pt.tqs.g205.services.EncomendaRestauranteService;
 import pt.tqs.g205.services.ReservaService;
 import pt.tqs.g205.services.RestauranteService;
@@ -95,4 +97,17 @@ public class RestauranteResource {
     return ResponseEntity.ok(parcela);
   }
 
+  /**
+   * Endpoint para atualizar estado da encomenda.
+   * @param id id do restaurante.
+   * @param encomenda id da encomenda.
+   * @return encomenda atualizada.
+   */
+  @RequestMapping(value = "/{id}/encomendas/{encomenda}", method = RequestMethod.PUT)
+  public ResponseEntity<EncomendaRestaurante> updateEncomendas(@PathVariable("id") Integer id, 
+      @PathVariable("encomenda") Integer encomenda, @RequestBody AtualizarParcelaModel model) {
+    EncomendaRestaurante parcela = encomendaRestauranteService.updateParcela(model);
+
+    return ResponseEntity.ok(parcela);
+  }
 }
