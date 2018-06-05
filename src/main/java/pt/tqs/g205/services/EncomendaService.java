@@ -175,6 +175,7 @@ public class EncomendaService {
     enc.setPratos(pratosEnc);
     ppeRepo.saveAll(pratosEnc);
     pratoRepo.saveAll(pratos);
+    enc.calcularPreco();
     Encomenda resultado = encomendaRepo.save(enc);
     
         
