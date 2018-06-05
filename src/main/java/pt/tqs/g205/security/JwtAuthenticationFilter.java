@@ -2,6 +2,7 @@ package pt.tqs.g205.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -53,6 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     String token = jwtUtil.generateToken(username);
     
     res.addHeader("Authorization", "Bearer " + token);
+    res.addHeader("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE);
     LoginDto dto = new LoginDto(id, "Bearer " + token);
     
     res.getWriter().write(new ObjectMapper().writeValueAsString(dto));

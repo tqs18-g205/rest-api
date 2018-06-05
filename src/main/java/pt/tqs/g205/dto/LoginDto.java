@@ -12,6 +12,11 @@ public class LoginDto implements Serializable {
     super();
   }
 
+  /**
+   * Construtor.
+   * @param cliente id do cliente.
+   * @param token token de autenticacao.
+   */
   public LoginDto(Integer cliente, String token) {
     super();
     this.cliente = cliente;
